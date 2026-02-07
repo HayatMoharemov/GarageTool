@@ -1,5 +1,3 @@
-from random import choices
-
 from django.db import models
 
 from common.models import TimeStampModel
@@ -46,14 +44,28 @@ class VehicleTypeBaseModel(TimeStampModel):
         return f"{self.type} - {self.make} {self.model} {displacement}."
 
 class CarModel(VehicleTypeBaseModel):
-    pass
+    class Meta:
+        verbose_name = 'Car'
+        verbose_name_plural = 'Cars'
+
+    type = models.CharField(max_length=20,
+                            choices=VehicleTypeBaseModel.VehicleTypeChoices.choices,
+                            default=VehicleTypeBaseModel.VehicleTypeChoices.CAR,
+                            editable=False)
 
 class MotorcycleModel(VehicleTypeBaseModel):
+    class Meta:
+        verbose_name = 'Motorcycle'
+        verbose_name_plural = 'Motorcycles'
 
     class MotorcycleEngineTypeChoices(models.TextChoices):
         TWOST = '2T', '2-Stroke'
         FOURST = '4T', '4-Stroke'
 
+    type = models.CharField(max_length=20,
+                                 choices=VehicleTypeBaseModel.VehicleTypeChoices.choices,
+                                 default=VehicleTypeBaseModel.VehicleTypeChoices.MOTORCYCLE,
+                                 editable=False)
     engine_type = models.CharField(max_length=15,
                                    choices=MotorcycleEngineTypeChoices.choices)
     fuel_type = models.CharField(max_length=20,
