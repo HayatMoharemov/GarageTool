@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="buttons-container">
+        <a class="btn-card" href="#">
+            <img src="{% static "images/bike-button.png" %}" alt="Bike Logo">
+            <span>Add bike</span>
+        </a>
+        <a class="btn-card" href="#">
+            <img src="{% static "images/racecar-button.png" %}" alt="RaceCar Logo">
+            <span>Add car</span>
+        </a>
+    </div>
+    <div class="information">
+        <p>
+            With the <strong>GarageTool</strong> application, you can easily manage all cars and motorcycles that come in for repair or maintenance.
+            You can <strong>add</strong> new vehicles with details such as make, model, registration, and type of service,
+            <strong>update</strong> their information when changes occur, <strong>remove</strong> completed or canceled entries,
+            and <em>track the full service history</em> of each vehicle.
+        </p>
+    </div>
+{% endblock %}

@@ -41,7 +41,7 @@ class VehicleTypeBaseModel(TimeStampModel):
         else:
             displacement += 'L'
 
-        return f"{self.type} - {self.make} {self.model} {displacement}."
+        return f" {self.make} {self.model} {displacement}."
 
 class CarModel(VehicleTypeBaseModel):
     class Meta:
