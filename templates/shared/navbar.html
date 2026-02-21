@@ -2,8 +2,11 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
   <div class="container-fluid">
     <ul class="navbar-nav d-flex flex-row mx-auto">
+        <li class="nav-item me-4">
+        <a class="nav-link neon-text" aria-current="page" href="{% url 'common:home' %}">Home</a>
+      </li>
       <li class="nav-item me-4">
-        <a class="nav-link neon-text" aria-current="page" href="#">My Garage</a>
+        <a class="nav-link neon-text" aria-current="page" href="{% url 'garage:view_garage' %}">My Garage</a>
       </li>
       <li class="nav-item me-4">
         <a class="nav-link neon-text" aria-current="page" href="#">Parts Catalogue</a>
@@ -12,6 +15,5 @@
         <a class="nav-link neon-text" aria-current="page" href="#">Expenses Calculator</a>
       </li>
     </ul>
-
   </div>
 </nav>

@@ -3,11 +3,11 @@
 
 {% block content %}
     <div class="buttons-container">
-        <a class="btn-card" href="#">
+        <a class="btn-card" href="{% url 'garage:add_bike' %}">
             <img src="{% static "images/bike-button.png" %}" alt="Bike Logo">
             <span>Add bike</span>
         </a>
-        <a class="btn-card" href="#">
+        <a class="btn-card" href="{% url 'garage:add_car' %}">
             <img src="{% static "images/racecar-button.png" %}" alt="RaceCar Logo">
             <span>Add car</span>
         </a>

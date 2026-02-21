@@ -1,0 +1,74 @@
+.form-add {
+    width: 600px;
+    margin: 60px auto;
+    padding: 50px;
+    background-color: #111;
+    border: 2px solid red;
+    border-radius: 25px;
+    box-shadow: 0 0 20px rgba(255, 0, 0, 0.6);
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    font-family: "Titillium Web", sans-serif;
+}
+
+.form-add h2 {
+    text-align: center;
+    font-size: 2rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+}
+
+.form-add label {
+    font-size: 1rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.form-add input,
+.form-add textarea,
+.form-add select {
+    width: 100%;
+    padding: 12px 15px;
+    border-radius: 12px;
+    border: 1px solid red;
+    background-color: #1a1a1a;
+    color: white;
+    font-size: 1rem;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.form-add input:focus,
+.form-add textarea:focus,
+.form-add select:focus {
+    border-color: #ff0000;
+    box-shadow: 0 0 10px rgba(255, 0, 0, 0.7);
+}
+
+.form-add textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+.form-add button {
+    margin-top: 15px;
+    padding: 15px;
+    border-radius: 20px;
+    border: 2px solid red;
+    background-color: transparent;
+    color: white;
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.form-add button:hover {
+    background-color: red;
+    color: black;
+    box-shadow: 0 0 20px rgba(255, 0, 0, 0.9);
+    transform: translateY(-3px);
+}

@@ -8,11 +8,16 @@ class BaseForm(forms.ModelForm):
     class Meta:
         model = VehicleTypeBaseModel
         fields = '__all__'
+        exclude = ['is_repaired']
         widgets = {
             'make': forms.TextInput(attrs={'placeholder': 'Enter make'}),
             'model': forms.TextInput(attrs={'placeholder': 'Enter model'}),
-            'mileage': forms.NumberInput(attrs={'placeholder': 'Enter mileage'}),
-            'horsepower': forms.NumberInput(attrs={'placeholder': 'Enter horsepower'}),
+            'production_date': forms.DateInput(attrs={'type': 'date'}),
+            'engine_displacement': forms.NumberInput(attrs={'min': 0}),
+            'mileage': forms.NumberInput(attrs={'placeholder': 'Enter mileage',
+                                                'min': 0}),
+            'horsepower': forms.NumberInput(attrs={'placeholder': 'Enter horsepower',
+                                                   'min': 0}),
             'notes': forms.Textarea(attrs={'placeholder': 'Add notes to the vehicle'})
         }
 

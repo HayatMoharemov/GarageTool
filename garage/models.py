@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils.text import slugify
 
 from common.models import TimeStampModel
 from common.validators import check_if_is_positive
@@ -28,11 +29,18 @@ class VehicleTypeBaseModel(TimeStampModel):
                                  choices=VehicleFuelChoices.choices)
     is_repaired = models.BooleanField(default=False)
     notes = models.TextField()
-
+    slug = models.SlugField(editable=False)
 
     class Meta:
         abstract = True
         ordering = ['-created_at']
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            super().save(*args, **kwargs)
+            self.slug = slugify(f"{self.make}-{self.model}-{self.id}")
+            kwargs['force_update'] = True
+        super().save(*args, **kwargs)
 
     def __str__(self):
         displacement = f"{self.engine_displacement}"
