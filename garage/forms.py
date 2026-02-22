@@ -8,7 +8,6 @@ class BaseForm(forms.ModelForm):
     class Meta:
         model = VehicleTypeBaseModel
         fields = '__all__'
-        exclude = ['is_repaired']
         widgets = {
             'make': forms.TextInput(attrs={'placeholder': 'Enter make'}),
             'model': forms.TextInput(attrs={'placeholder': 'Enter model'}),
@@ -18,6 +17,7 @@ class BaseForm(forms.ModelForm):
                                                 'min': 0}),
             'horsepower': forms.NumberInput(attrs={'placeholder': 'Enter horsepower',
                                                    'min': 0}),
+            'repair_status':forms.CheckboxInput(),
             'notes': forms.Textarea(attrs={'placeholder': 'Add notes to the vehicle'})
         }
 

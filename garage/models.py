@@ -27,9 +27,10 @@ class VehicleTypeBaseModel(TimeStampModel):
     horsepower = models.IntegerField(validators=[check_if_is_positive])
     fuel_type = models.CharField(max_length=20,
                                  choices=VehicleFuelChoices.choices)
-    is_repaired = models.BooleanField(default=False)
+    repair_status = models.BooleanField(default=False)
     notes = models.TextField()
-    slug = models.SlugField(editable=False)
+    slug = models.SlugField(unique=True,
+                            editable=False)
 
     class Meta:
         abstract = True
@@ -39,8 +40,8 @@ class VehicleTypeBaseModel(TimeStampModel):
         if not self.slug:
             super().save(*args, **kwargs)
             self.slug = slugify(f"{self.make}-{self.model}-{self.id}")
-            kwargs['force_update'] = True
-        super().save(*args, **kwargs)
+            return super().save(update_fields=["slug"])
+        return super().save(*args, **kwargs)
 
     def __str__(self):
         displacement = f"{self.engine_displacement}"
