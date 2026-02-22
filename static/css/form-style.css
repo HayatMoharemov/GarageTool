@@ -1,4 +1,4 @@
-.form-add {
+.form-style {
     width: 600px;
     margin: 60px auto;
     padding: 50px;
@@ -12,7 +12,7 @@
     font-family: "Titillium Web", sans-serif;
 }
 
-.form-add h2 {
+.form-style h2 {
     text-align: center;
     font-size: 2rem;
     text-transform: uppercase;
@@ -20,16 +20,16 @@
     margin-bottom: 10px;
 }
 
-.form-add label {
+.form-style label {
     font-size: 1rem;
     font-weight: 500;
     text-transform: uppercase;
     letter-spacing: 1px;
 }
 
-.form-add input,
-.form-add textarea,
-.form-add select {
+.form-style input,
+.form-style textarea,
+.form-style select {
     width: 100%;
     padding: 12px 15px;
     border-radius: 12px;
@@ -41,19 +41,19 @@
     transition: all 0.3s ease;
 }
 
-.form-add input:focus,
-.form-add textarea:focus,
-.form-add select:focus {
+.form-style input:focus,
+.form-style textarea:focus,
+.form-style select:focus {
     border-color: #ff0000;
     box-shadow: 0 0 10px rgba(255, 0, 0, 0.7);
 }
 
-.form-add textarea {
+.form-style textarea {
     resize: vertical;
     min-height: 100px;
 }
 
-.form-add button {
+.form-style button {
     margin-top: 15px;
     padding: 15px;
     border-radius: 20px;
@@ -66,9 +66,50 @@
     transition: all 0.3s ease;
 }
 
-.form-add button:hover {
+.form-style button:hover {
     background-color: red;
     color: black;
     box-shadow: 0 0 20px rgba(255, 0, 0, 0.9);
     transform: translateY(-3px);
+}
+.search-form {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin: 20px 0;
+}
+
+.search-form .input {
+    width: 250px;
+    padding: 10px 15px;
+    border-radius: 12px;
+    border: 2px solid red;
+    background-color: #1a1a1a;
+    color: white;
+    font-size: 1rem;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.search-form .input:focus {
+    border-color: #ff0000;
+    box-shadow: 0 0 10px rgba(255,0,0,0.5);
+}
+
+.search-form .search-button {
+    padding: 10px 20px;
+    border-radius: 12px;
+    border: 2px solid red;
+    background-color: transparent;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.search-form .search-button:hover {
+    background-color: rgba(255,0,0,0.2);
+    box-shadow: 0 0 10px rgba(255,0,0,0.4);
+    transform: translateY(-2px);
 }

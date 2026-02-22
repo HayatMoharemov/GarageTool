@@ -1,0 +1,35 @@
+.neon-text-h {
+    color: #ff0000;
+    text-shadow:
+        0 0 5px #ff1414,
+        0 0 10px #ff1414,
+        0 0 40px #ff1414;
+    transition: all 0.3s ease;
+}
+
+.titillium-font {
+    font-size: 1.2rem;
+    padding: 0.5rem 1rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    font-family: "Titillium Web", sans-serif;
+}
+
+.titillium-web-extralight {
+  font-family: "Titillium Web", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.text-h {
+    color: #ffffff;
+    text-align: center;
+    font-size: 2.5rem;
+}
+
+.delete-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 20px;
+}

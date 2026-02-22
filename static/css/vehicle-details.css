@@ -1,0 +1,49 @@
+.vehicle-card-details {
+    max-width: 500px;
+    margin: 40px auto;
+    padding: 30px;
+    background-color: #111;
+    border: 2px solid red;
+    border-radius: 20px;
+    box-shadow: 0 0 15px rgba(255,0,0,0.5);
+    color: white;
+    font-family: "Titillium Web", sans-serif;
+    line-height: 1.6;
+}
+
+.vehicle-card-details p {
+    margin: 8px 0;
+}
+
+.edit-button {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 12px 20px;
+    border-radius: 12px;
+    border: 2px solid red;
+    background-color: transparent;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+.edit-button:hover {
+    background-color: rgba(255, 0, 0, 0.2);
+    color: #fff;
+    box-shadow: 0 0 10px rgba(255, 0, 0, 0.4);
+    transform: translateY(-2px);
+}
+
+.empty-text {
+    text-align: center;
+    margin-bottom: 15px;
+    color: white;
+    font-size:1.8rem
+}
+
+.vehicle-empty-list {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
