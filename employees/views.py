@@ -1,6 +1,5 @@
 from django.db.models import Q
 from django.http import Http404
-from django.shortcuts import render
 from django.urls import reverse_lazy, reverse
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView, DetailView
 

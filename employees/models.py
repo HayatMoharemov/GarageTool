@@ -20,9 +20,10 @@ class EmployeeModel(models.Model):
                                            blank=True,
                                            related_name='employees_cars')
     assigned_bikes = models.ForeignKey(MotorcycleModel,
-                                            null=True,
-                                            on_delete=models.SET_NULL,
-                                            related_name='employees_bikes')
+                                        blank=True,
+                                        null=True,
+                                        on_delete=models.SET_NULL,
+                                        related_name='employees_bikes')
     slug = models.SlugField(unique=True,
                             editable=False)
 
