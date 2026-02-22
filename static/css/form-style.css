@@ -113,3 +113,14 @@
     box-shadow: 0 0 10px rgba(255,0,0,0.4);
     transform: translateY(-2px);
 }
+
+.form-style .form-field {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+.form-style .form-field label {
+    margin-bottom: 5px;
+    font-weight: bold;
+}

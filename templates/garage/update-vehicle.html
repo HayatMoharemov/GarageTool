@@ -1,12 +1,58 @@
 {% extends 'base.html' %}
-{% block title %}Update vehicle{% endblock %}
+{% block title %}GarageTool | Update vehicle{% endblock %}
 {% load static %}
 {% block content %}
     <div class="form-style">
         <h1>Update vehicle</h1>
         <form method="post">
             {% csrf_token %}
-            {{ form.as_p }}
+            
+            <div class="form-field">
+            <label for="{{ form.make.id_for_label }}">Make:</label>
+            {{ form.make }}
+            </div>
+    
+            <div class="form-field">
+                <label for="{{ form.model.id_for_label }}">Model:</label>
+                {{ form.model }}
+            </div>
+    
+            <div class="form-field">
+                <label for="{{ form.production_date.id_for_label }}">Production date:</label>
+                {{ form.production_date }}
+            </div>
+    
+            <div class="form-field">
+                <label for="{{ form.mileage.id_for_label }}">Mileage:</label>
+                {{ form.mileage }}
+            </div>
+    
+            <div class="form-field">
+                <label for="{{ form.engine_displacement.id_for_label }}">Engine displacement:</label>
+                {{ form.engine_displacement }}
+            </div>
+    
+            <div class="form-field">
+                <label for="{{ form.horsepower.id_for_label }}">Horsepower:</label>
+                {{ form.horsepower }}
+            </div>
+    
+            <div class="form-field">
+                <label for="{{ form.fuel_type.id_for_label }}">Fuel type:</label>
+                {{ form.fuel_type }}
+            </div>
+    
+            <div class="form-field">
+                <label class="custom-checkbox">
+                    {{ form.repair_status }}
+                    Repair status
+                </label>
+            </div>
+    
+            <div class="form-field">
+                <label for="{{ form.notes.id_for_label }}">Info:</label>
+                {{ form.notes }}
+            </div>
             <button class="add-button" type="submit">Save changes</button>
         </form>
     </div>

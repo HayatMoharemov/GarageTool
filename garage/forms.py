@@ -17,7 +17,7 @@ class BaseForm(forms.ModelForm):
                                                 'min': 0}),
             'horsepower': forms.NumberInput(attrs={'placeholder': 'Enter horsepower',
                                                    'min': 0}),
-            'repair_status':forms.CheckboxInput(),
+            'repair_status': forms.CheckboxInput(),
             'notes': forms.Textarea(attrs={'placeholder': 'Add notes to the vehicle'})
         }
 

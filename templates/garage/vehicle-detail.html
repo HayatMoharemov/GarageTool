@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% block title %}GarageTool | {{ object.make }} {{object.model}}{% endblock %}
 {% load static %}
 {% block content %}
     <div class="titillium-font">
@@ -17,12 +18,10 @@
             <p><strong>Engine type:</strong> {{ object.engine_type }}</p>
             <p><strong>Engine displacement:</strong> {{ object.engine_displacement }}cc</p>
         {% endif %}
-        <p>
-            <strong>Repair status:{{ object.is_repaired }}</strong>
-            {% if object.is_repaired %}Repaired
+            <strong>Repair status:</strong>
+            {% if object.repair_status %}Repaired
             {% else %}Not repaired
             {% endif %}
-        </p>
         <p><strong>Info:</strong> {{ object.notes }}</p>
         <p><strong>Last updated at:</strong> {{ object.updated_at }}</p>
         <a class="edit-button" href="{% url 'garage:vehicle_edit' object.slug %}" >Edit</a>
