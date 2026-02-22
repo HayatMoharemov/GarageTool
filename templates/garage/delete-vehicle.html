@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block title %}GarageTool | Edit Vehicle{% endblock %}
+{% block content %}
+    <p class="text-h titillium-font">Are you sure you want to delete {{ object.make }} {{ object.model }} added on {{ object.created_at }} ?</p>
+    <form method="post">
+        {% csrf_token %}
+        <div class="delete-buttons">
+            <button class="edit-button" type="submit">Delete</button>
+            <a class="edit-button" href="{% url 'garage:vehicle_detail' object.slug %}">Cancel</a>
+        </div>
+    </form>
+{% endblock %}

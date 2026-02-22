@@ -2,11 +2,11 @@
 {% block title %}GarageTool - Add motorcycle{% endblock %}
 {% load static %}
 {% block content %}
-    <div class="form-add">
+    <div class="form-style">
         <h1>Add motorcycle</h1>
         <form method="post">
-            {{ form.as_p }}
             {% csrf_token %}
+            {{ form.as_p }}
             <button class="add-button" type="submit">Add to garage</button>
         </form>
     </div>

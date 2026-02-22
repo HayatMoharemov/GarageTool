@@ -1,11 +1,30 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block content %}
-    <h1>My Garage</h1>
-    <div class="vehicle-list">
-        {% for v in vehicles %}
-            <span>{{ vehicle.make }} {{ vehicle.model }}</span>
-        {% empty %}
-            <p class="text-center">No vehicles found in the garage.</p>
-        {% endfor %}
-    </div>
+    <h1 class="text-h titillium-font">My Garage</h1>
+    {% if vehicles %}
+        <form class="search-form" method="get">
+            <input class="input" type="search" name="?q" placeholder="Search by make or model" value="{{ request.GET.q }}">
+            <button class="search-button" type="submit">Search</button>
+            <a href="{% url 'common:home' %}" class="search-button" type="submit">Add new vehicle</a>
+        </form>
+    {% endif %}
+    <div class="vehicle titillium-font">
+    {% for v in vehicles %}
+        <a href="{% url 'garage:vehicle_detail' v.slug %}" class="vehicle-card">
+            <span>{{ v.make }} {{ v.model }}</span>
+            <p><strong>Added on:</strong> {{ v.created_at }}</p>
+        </a>
+    {% empty %}
+        <p class="empty-text titillium-font">
+            You haven't added any vehicles yet.
+            In order to view what is in your garage, you will need to add vehicles first.
+            You can do that from the following buttons:
+        </p>
+        <div class="vehicle-empty-list">
+            <a class="edit-button" href="{% url 'garage:add_car' %}">Add car</a>
+            <a class="edit-button" href="{% url 'garage:add_bike'%}">Add Motorcycle</a>
+        </div>
+    {% endfor %}
+</div>
 {% endblock %}

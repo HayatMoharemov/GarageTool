@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <div class="titillium-font">
+        <h1>Vehicle details</h1>
+    </div>
+    <div class="vehicle-card-details titillium-font">
+        <p><strong>Make:</strong> {{ object.make }}</p>
+        <p><strong>Model:</strong> {{ object.model }}</p>
+        <p><strong>Production year:</strong> {{ object.production_date }}</p>
+        <p><strong>Mileage:</strong> {{ object.mileage }} km</p>
+        <p><strong>Horsepower:</strong> {{ object.horsepower }} hp</p>
+        {% if object.type == 'CAR' %}
+            <p><strong>Fuel type:</strong> {{ object.fuel_type }}</p>
+            <p><strong>Engine displacement:</strong> {{ object.engine_displacement }}L</p>
+        {% elif  object.type == 'MC' %}
+            <p><strong>Engine type:</strong> {{ object.engine_type }}</p>
+            <p><strong>Engine displacement:</strong> {{ object.engine_displacement }}cc</p>
+        {% endif %}
+        <p>
+            <strong>Repair status:{{ object.is_repaired }}</strong>
+            {% if object.is_repaired %}Repaired
+            {% else %}Not repaired
+            {% endif %}
+        </p>
+        <p><strong>Info:</strong> {{ object.notes }}</p>
+        <p><strong>Last updated at:</strong> {{ object.updated_at }}</p>
+        <a class="edit-button" href="{% url 'garage:vehicle_edit' object.slug %}" >Edit</a>
+        <a class="edit-button" href="{% url 'garage:vehicle_delete' object.slug %}">Delete</a>
+    </div>
+{% endblock %}
