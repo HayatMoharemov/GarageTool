@@ -1,10 +1,52 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-
-</body>
-</html>
+{% extends 'base.html' %}
+{% block title %}GarageTool | Edit employee{% endblock %}
+{% load static %}
+{% block content %}
+    <div class="form-style">
+        <h1>Update employee</h1>
+        <form method="post">
+            {% csrf_token %}
+            
+            <div class="form-field">
+            <label for="{{ form.first_name.id_for_label }}">First name:</label>
+            {{ form.first_name }}
+            </div>
+    
+            <div class="form-field">
+                <label for="{{ form.last_name.id_for_label }}">Last name:</label>
+                {{ form.last_name }}
+            </div>
+            
+            <div class="form-field">
+                <label for="{{ form.age.id_for_label }}">Age:</label>
+                {{ form.age }}
+            </div>
+    
+            <div class="form-field">
+                <label for="{{ form.hourly_wage.id_for_label }}">Hourly wage:</label>
+                {{ form.hourly_wage }}
+            </div>
+    
+            <div class="form-field">
+                <label for="{{ form.hours_weekly.id_for_label }}">Weekly hours:</label>
+                {{ form.hours_weekly }}
+            </div>
+    
+            <div class="form-field">
+                <label for="{{ form.hired_at.id_for_label }}">Hired on:</label>
+                {{ form.hired_at }}
+            </div>
+    
+            <div class="form-field">
+                <label for="{{ form.assigned_cars.id_for_label }}">Assigned cars:</label>
+                {{ form.assigned_cars }}
+            </div>
+    
+            <div class="form-field">
+                <label for="{{ form.assigned_bikes.id_for_label }}">Assigned bikes:</label>
+                {{ form.assigned_bikes }}
+            </div>
+            <button class="add-button" type="submit">Save changes</button>
+        </form>
+    </div>
+{% endblock %}

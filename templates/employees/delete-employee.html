@@ -1,10 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-
-</body>
-</html>
+{% extends 'base.html' %}
+{% block title %}GarageTool | Delete Employee{% endblock %}
+{% block content %}
+    <p class="text-h titillium-font">Are you sure you want to delete {{ object.first_name }} {{ object.last_name }} with ID {{ object.id }} ?</p>
+    <form method="post">
+        {% csrf_token %}
+        <div class="delete-buttons">
+            <button class="edit-button" type="submit">Delete</button>
+            <a class="edit-button" href="{% url 'employees:employee_details' object.slug %}">Cancel</a>
+        </div>
+    </form>
+{% endblock %}

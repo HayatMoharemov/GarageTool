@@ -1,10 +1,35 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-
-</body>
-</html>
+{% extends 'base.html' %}
+{% block title %}GarageTool | {{ object.first_name }} {{object.last_name}}{% endblock %}
+{% load static %}
+{% block content %}
+    <div class="titillium-font">
+        <h1>Employee details</h1>
+    </div>
+    <div class="vehicle-card-details titillium-font">
+        <p><strong>First name:</strong> {{ object.first_name }}</p>
+        <p><strong>Last name:</strong> {{ object.last_name }}</p>
+        <p><strong>Hired on:</strong> {{ object.hired_at }}</p>
+        <p><strong>Age:</strong> {{ object.age }}</p>
+        <p><strong>Hourly wage:</strong> {{ object.hourly_wage }} $</p>
+        <p><strong>Assigned cars:</strong>
+        {% if object.assigned_cars.exists %}
+            {% for car in object.assigned_cars.all %}
+                {{ car.name }}
+                {% if not forloop.last %},
+                {% endif %}
+            {% endfor %}
+        {% else %}
+            No assigned cars.
+        {% endif %}
+        </p>
+        <p><strong>Assigned bikes:</strong>
+            {% if object.assigned_bikes %}
+                 {{ object.assigned_bikes.make }} {{ object.assigned_bikes.model }} with ID {{ object.assigned_bikes.id }}
+            {% else %}
+                No assigned bikes.
+            {% endif %}
+        </p>
+        <a class="edit-button" href="{% url 'employees:employee_edit' object.slug %}" >Edit</a>
+        <a class="edit-button" href="{% url 'employees:delete_employee' object.slug %}">Delete</a>
+    </div>
+{% endblock %}

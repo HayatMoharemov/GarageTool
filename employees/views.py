@@ -27,7 +27,7 @@ class AddEmployee(CreateView):
     model = EmployeeModel
     form_class = EmployeeForm
     template_name = 'employees/add-employee.html'
-    success_url = reverse_lazy('employees/employees-list.html')
+    success_url = reverse_lazy('employees:employees_list')
 
 class EditEmployee(UpdateView):
     template_name = 'employees/edit-employee.html'
@@ -77,7 +77,7 @@ class EmployeeDetails(DetailView):
 
     def get_object(self, queryset = None):
 
-        slug = self.kwargs.get('vehicle_slug')
+        slug = self.kwargs.get('employee_slug')
 
         employee = EmployeeModel.objects.filter(slug=slug).first()
 

@@ -2,29 +2,27 @@
 {% block title %} GarageTool | Employees {% endblock %}
 {% load static %}
 {% block content %}
-    <h1 class="text-h titillium-font">My Garage</h1>
-    {% if vehicles %}
+    <h1 class="text-h titillium-font">Employees</h1>
+    {% if employees %}
         <form class="search-form" method="get">
-            <input class="input" type="search" name="?q" placeholder="Search by make or model" value="{{ request.GET.q }}">
+            <input class="input" type="search" name="?q" placeholder="Search by first or last name" value="{{ request.GET.q }}">
             <button class="search-button" type="submit">Search</button>
-            <a href="{% url 'common:home' %}" class="search-button" type="submit">Add new vehicle</a>
+            <a href="{% url 'employees:add_employee' %}" class="search-button" type="submit">Add new employee</a>
         </form>
     {% endif %}
     <div class="vehicle titillium-font">
-    {% for v in vehicles %}
-        <a href="{% url 'garage:vehicle_detail' v.slug %}" class="vehicle-card">
-            <span>{{ v.make }} {{ v.model }}</span>
-            <p><strong>Added on:</strong> {{ v.created_at }}</p>
+    {% for e in employees %}
+        <a href="{% url 'employees:employee_details' e.slug %}" class="vehicle-card">
+            <span>{{ e.first_name }} {{ e.last_name }}</span>
+            <p><strong>Recruited on:</strong> {{ e.hired_at }}</p>
         </a>
     {% empty %}
         <p class="empty-text titillium-font">
-            You haven't added any vehicles yet.
-            In order to view what is in your garage, you will need to add vehicles first.
-            You can do that from the following buttons:
+            You haven't added any employees yet.
+            You can do that from the following button:
         </p>
         <div class="vehicle-empty-list">
-            <a class="edit-button" href="{% url 'garage:add_car' %}">Add car</a>
-            <a class="edit-button" href="{% url 'garage:add_bike'%}">Add Motorcycle</a>
+            <a class="edit-button" href="{% url 'employees:add_employee' %}">Add employee</a>
         </div>
     {% endfor %}
 </div>

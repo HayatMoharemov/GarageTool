@@ -15,15 +15,17 @@ class EmployeeModel(models.Model):
     hours_weekly = models.DecimalField(max_digits=3,
                                        decimal_places=1,
                                        validators=[MinValueValidator(0)])
-    hired_at = models.DateField(auto_now_add=True)
+    hired_at = models.DateField()
     assigned_cars = models.ManyToManyField(CarModel,
                                            blank=True,
-                                           related_name='employees_cars')
+                                           related_name='employees_cars',
+                                           default=None)
     assigned_bikes = models.ForeignKey(MotorcycleModel,
                                         blank=True,
                                         null=True,
                                         on_delete=models.SET_NULL,
-                                        related_name='employees_bikes')
+                                        related_name='employees_bikes',
+                                       default=None)
     slug = models.SlugField(unique=True,
                             editable=False)
 

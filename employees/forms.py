@@ -24,4 +24,7 @@ class EmployeeForm(forms.ModelForm):
             'hours_weekly': forms.NumberInput(attrs={
                     'min': 0
             }),
+            'hired_at': forms.DateInput(attrs={
+                'type': 'date'
+            })
         }

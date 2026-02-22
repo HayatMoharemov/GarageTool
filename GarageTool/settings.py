@@ -34,6 +34,7 @@ MY_APPS = [
     'catalogue',
     'common',
     'garage',
+    'employees',
 ]
 
 INSTALLED_APPS = [
