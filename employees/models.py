@@ -6,6 +6,11 @@ from garage.models import CarModel, MotorcycleModel
 
 
 class EmployeeModel(models.Model):
+
+    class Meta:
+        verbose_name = 'Employee'
+        verbose_name_plural = 'Employees'
+
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
     age = models.IntegerField(validators=[MinValueValidator(18)])

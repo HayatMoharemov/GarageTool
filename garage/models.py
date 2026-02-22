@@ -52,6 +52,8 @@ class VehicleTypeBaseModel(TimeStampModel):
 
         return f" {self.make} {self.model} {displacement}."
 
+
+
 class CarModel(VehicleTypeBaseModel):
     class Meta:
         verbose_name = 'Car'

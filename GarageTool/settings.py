@@ -30,10 +30,10 @@ ALLOWED_HOSTS = []
 
 # Application definition
 MY_APPS = [
-    'calculator',
-    'catalogue',
     'common',
     'garage',
+    'calculator',
+    'catalogue',
     'employees',
 ]
 

@@ -17,14 +17,10 @@
             <p><strong>Added on:</strong> {{ v.created_at }}</p>
         </a>
     {% empty %}
-        <p class="empty-text titillium-font">
-            You haven't added any vehicles yet.
-            In order to view what is in your garage, you will need to add vehicles first.
-            You can do that from the following buttons:
-        </p>
-        <div class="vehicle-empty-list">
-            <a class="edit-button" href="{% url 'garage:add_car' %}">Add car</a>
-            <a class="edit-button" href="{% url 'garage:add_bike'%}">Add Motorcycle</a>
+        <div class="vehicle-empty-list titillium-font">
+            <p>No vehicles.</p>
+            <a class="go-back-button" href="{% url 'garage:add_car' %}">Add car</a>
+            <a class="go-back-button" href="{% url 'garage:add_bike'%}">Add Motorcycle</a>
         </div>
     {% endfor %}
 </div>

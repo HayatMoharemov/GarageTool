@@ -14,7 +14,7 @@ class ViewEmployees(ListView):
 
     def get_queryset(self):
 
-        qs = self.request.GET.get('?q','')
+        qs = self.request.GET.get('q','')
 
         employees = EmployeeModel.objects.all()
 

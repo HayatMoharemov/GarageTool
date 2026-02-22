@@ -1,0 +1,81 @@
+form.create-offer-container {
+    max-width: 800px;
+    margin: 50px auto;
+    padding: 40px;
+    background: #1e1e1e;
+    border-radius: 18px;
+    box-shadow: 0 0 30px rgba(0,0,0,0.5);
+    color: white;
+    font-family: 'Titillium Web', sans-serif;
+}
+
+form.create-offer-container h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 28px;
+    letter-spacing: 1px;
+    font-weight: 700;
+}
+
+form.create-offer-container select {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 25px;
+    border-radius: 10px;
+    border: 2px solid #444;
+    background: #2b2b2b;
+    color: white;
+    font-size: 16px;
+    outline: none;
+    transition: 0.3s ease;
+}
+
+form.create-offer-container select:focus {
+    border-color: red;
+    box-shadow: 0 0 10px rgba(255, 0, 0, 0.4);
+}
+
+form.create-offer-container h3 {
+    margin-top: 30px;
+    margin-bottom: 15px;
+    font-size: 20px;
+    border-bottom: 1px solid #333;
+    padding-bottom: 5px;
+    font-weight: 600;
+}
+
+form.create-offer-container input[type="checkbox"] {
+    accent-color: red;
+    transform: scale(1.2);
+    margin-right: 8px;
+}
+
+form.create-offer-container label.item-row:hover {
+    color: red;
+    cursor: pointer;
+}
+
+form.create-offer-container br {
+    margin-bottom: 8px;
+}
+
+form.create-offer-container button {
+    display: block;
+    width: 100%;
+    margin-top: 30px;
+    padding: 14px;
+    border-radius: 12px;
+    border: 2px solid red;
+    background: transparent;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+form.create-offer-container button:hover {
+    background: rgba(255, 0, 0, 0.2);
+    box-shadow: 0 0 15px rgba(255, 0, 0, 0.5);
+    transform: translateY(-2px);
+}

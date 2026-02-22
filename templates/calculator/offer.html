@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="offer-container">
+    <h2>Offer for {{ calculator.vehicle }}</h2>
+
+    <h3>Parts</h3>
+    <ul>
+        {% for part in calculator.parts.all %}
+            <li>{{ part.title }} - {{ part.price }}</li>
+        {% empty %}
+            <li class="offer-empty">No added parts</li>
+        {% endfor %}
+    </ul>
+
+    <h3>Services</h3>
+    <ul>
+        {% for service in calculator.services.all %}
+            <li>{{ service.title }} - {{ service.price }}</li>
+        {% empty %}
+            <li class="offer-empty">No added services</li>
+        {% endfor %}
+    </ul>
+
+    <div class="offer-total">
+        Total: {{ calculator.total_price }} $
+    </div>
+</div>
+
+{% endblock %}

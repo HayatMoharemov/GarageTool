@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<form method="post" class="create-offer-container">
+    {% csrf_token %}
+
+    <h2>Create Offer</h2>
+
+    <select name="vehicle">
+        <optgroup label="Cars">
+            {% for car in cars %}
+                <option value="car-{{ car.id }}">{{ car }}</option>
+            {% endfor %}
+        </optgroup>
+
+        <optgroup label="Motorcycles">
+            {% for moto in motorcycles %}
+                <option value="motorcycle-{{ moto.id }}">{{ moto }}</option>
+            {% endfor %}
+        </optgroup>
+    </select>
+
+    <h3>Select Parts</h3>
+    {% for part in parts %}
+        <label class="item-row">
+            <input type="checkbox" name="parts" value="{{ part.id }}">
+            {{ part.title }} {{ part.manufacturer }} - {{ part.price }}
+        </label>
+    {% endfor %}
+
+    <h3>Select Services</h3>
+    {% for service in services %}
+        <label class="item-row">
+            <input type="checkbox" name="services" value="{{ service.id }}">
+            {{ service.title }} - {{ service.price }}
+        </label>
+    {% endfor %}
+
+    <button type="submit">Create Offer</button>
+</form>
+{% endblock %}

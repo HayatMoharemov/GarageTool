@@ -16,7 +16,7 @@
                 <label for="{{ form.last_name.id_for_label }}">Last name:</label>
                 {{ form.last_name }}
             </div>
-            
+
             <div class="form-field">
                 <label for="{{ form.age.id_for_label }}">Age:</label>
                 {{ form.age }}
@@ -46,7 +46,10 @@
                 <label for="{{ form.assigned_bikes.id_for_label }}">Assigned bikes:</label>
                 {{ form.assigned_bikes }}
             </div>
-            <button class="add-button" type="submit">Save changes</button>
+            <div class="vehicle-empty-list">
+                <button class="go-back-button" type="submit">Save changes</button>
+                <a href="{% url 'employees:employees_list' %}" class="go-back-button">GO BACK</a>
+            </div>
         </form>
     </div>
 {% endblock %}

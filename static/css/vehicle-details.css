@@ -44,6 +44,30 @@
 
 .vehicle-empty-list {
     display: flex;
-    justify-content: center;
-    gap: 20px;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.vehicle-empty-list .go-back-button {
+    padding: 10px 20px;
+    border-radius: 12px;
+    border: 2px solid red;
+    background-color: transparent;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    height: 50px;
+    width: 200px;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+.vehicle-empty-list .go-back-button:hover {
+    background-color: rgba(255,0,0,0.2);
+    box-shadow: 0 0 10px rgba(255,0,0,0.4);
+    transform: translateY(-2px);
 }

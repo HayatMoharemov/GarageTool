@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block title %} GarageTool | Services Catalogue{% endblock %}
+{% load static %}
+{% block content %}
+    <h1 class="text-h titillium-font">Catalogue</h1>
+    {% if services %}
+        <form class="search-form" method="get">
+            <input class="input" type="search" name="q" placeholder="Search by service name" value="{{ request.GET.q }}">
+            <button class="search-button" type="submit">Search</button>
+            <a class="search-button" href="{% url 'catalogue:catalogue_initial_page' %}">Back</a>
+        </form>
+    {% endif %}
+    <div class="vehicle titillium-font">
+    {% for s in services %}
+        <a href="{% url 'catalogue:services_details' s.slug %}" class="vehicle-card">
+            <span>{{ s.title }} {{ s.price }}$</span>
+        </a>
+    {% empty %}
+        <div class="vehicle-empty-list titillium-font">
+            <p>No parts or services available in the catalogue.</p>
+            <a class="go-back-button" href="{% url 'catalogue:catalogue_initial_page' %}">Back</a>
+        </div>
+    {% endfor %}
+</div>
+{% endblock %}
+
