@@ -2,7 +2,7 @@ from django.db import models
 from django.utils.text import slugify
 
 from common.models import TimeStampModel
-from common.validators import check_if_is_positive
+from common.validators import check_if_is_positive, check_if_is_alpha
 
 
 class VehicleTypeBaseModel(TimeStampModel):
@@ -17,8 +17,10 @@ class VehicleTypeBaseModel(TimeStampModel):
 
     type = models.CharField(max_length=15,
                             choices=VehicleTypeChoices.choices)
-    make = models.CharField(max_length=50)
-    model = models.CharField(max_length=50)
+    make = models.CharField(max_length=50,
+                            validators=[check_if_is_alpha])
+    model = models.CharField(max_length=50,
+                             validators=[check_if_is_alpha])
     production_date = models.DateField()
     mileage = models.BigIntegerField(validators=[check_if_is_positive])
     engine_displacement = models.DecimalField(max_digits=4,

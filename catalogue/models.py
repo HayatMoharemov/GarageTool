@@ -2,13 +2,17 @@ from django.core.validators import MinValueValidator
 from django.db import models
 from django.utils.text import slugify
 
+from common.validators import check_if_is_alpha
+
 
 class BaseProduct(models.Model):
 
-    title = models.CharField(max_length=50)
+    title = models.CharField(max_length=50,
+                             validators=[check_if_is_alpha])
     price = models.DecimalField(max_digits=6,
                                 decimal_places=2,
-                                validators=[MinValueValidator(0)])
+                                validators=[MinValueValidator(0,
+                                                              message='Price cannot be less than 0')])
     slug = models.SlugField(unique=True,
                             editable=False)
 
