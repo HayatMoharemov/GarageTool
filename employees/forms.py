@@ -9,20 +9,22 @@ class EmployeeForm(forms.ModelForm):
         fields = '__all__'
         widgets = {
             'first_name': forms.TextInput(attrs={
-                'placeholder': 'Enter first name'
+                'placeholder': 'Enter employee first name'
             }),
             'last_name': forms.TextInput(attrs={
-                'placeholder': 'Enter last name'
+                'placeholder': 'Enter employee last name'
             }),
-            'age': forms.NumberInput(
-                attrs={
-                    'min': 18
+            'age': forms.NumberInput(attrs={
+                'placeholder':'Enter employee age'
+                ,'min': 18
             }),
             'hourly_wage': forms.NumberInput(attrs={
-                    'min': 0
+                'placeholder':'Enter hourly wage',
+                'min': 0
             }),
             'hours_weekly': forms.NumberInput(attrs={
-                    'min': 0
+                'min': 0,
+                'placeholder':'Enter weekly working hours'
             }),
             'hired_at': forms.DateInput(attrs={
                 'type': 'date'

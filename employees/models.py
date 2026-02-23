@@ -2,6 +2,7 @@ from django.core.validators import MinValueValidator
 from django.db import models
 from django.utils.text import slugify
 
+from common.validators import check_if_is_alpha
 from garage.models import CarModel, MotorcycleModel
 
 
@@ -11,15 +12,20 @@ class EmployeeModel(models.Model):
         verbose_name = 'Employee'
         verbose_name_plural = 'Employees'
 
-    first_name = models.CharField(max_length=50)
-    last_name = models.CharField(max_length=50)
-    age = models.IntegerField(validators=[MinValueValidator(18)])
+    first_name = models.CharField(max_length=50,
+                                  validators=[check_if_is_alpha])
+    last_name = models.CharField(max_length=50,
+                                  validators=[check_if_is_alpha])
+    age = models.IntegerField(validators=[MinValueValidator(18,
+                                                            message='Employees must be at least 18 years old.')])
     hourly_wage = models.DecimalField(max_digits=5,
                                       decimal_places=2,
-                                      validators=[MinValueValidator(0)])
+                                      validators=[MinValueValidator(0,
+                                                                    message='Hourly wage cannot be less than 0')])
     hours_weekly = models.DecimalField(max_digits=3,
                                        decimal_places=1,
-                                       validators=[MinValueValidator(0)])
+                                       validators=[MinValueValidator(0,
+                                                                     message='Working hours cannot be less than 0')])
     hired_at = models.DateField()
     assigned_cars = models.ManyToManyField(CarModel,
                                            blank=True,
