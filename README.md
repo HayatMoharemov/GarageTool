@@ -188,11 +188,12 @@ It can be used in templates to automatically add the currency, which can also be
   - 2 **Static Templates**
 - Appropriate **CSS** styling stored in ```static\css```
 - Custom **404** page.
+  - Test on http://127.0.0.1:8000/Krushi
 - No orphan pages
 
 ## 9. Data seeding
 
-- In the ```manage.py``` file there is already preloaded scripts that will automatically seed the DB with data.
+- In the ```manage.py``` file there are already preloaded scripts that will automatically seed the DB with data.
 In order to run the script, please uncomment the code from line ```28``` and after running the data should be seeded.
 
 ## Post Scriptum
