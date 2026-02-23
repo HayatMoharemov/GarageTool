@@ -18,8 +18,7 @@ class VehicleTypeBaseModel(TimeStampModel):
 
     type = models.CharField(max_length=15,
                             choices=VehicleTypeChoices.choices)
-    make = models.CharField(max_length=50,
-                            validators=[check_if_is_alpha])
+    make = models.CharField(max_length=50)
     model = models.CharField(max_length=50,
                              validators=[check_if_is_alpha])
     production_date = models.DateField()
@@ -28,7 +27,7 @@ class VehicleTypeBaseModel(TimeStampModel):
     engine_displacement = models.DecimalField(max_digits=4,
                                               decimal_places=1,
                                               validators=[MinValueValidator(0)],
-                                                          error_messages={'min_value': 'Engine displacement cannot be less than 0'})
+                                              error_messages={'min_value': 'Engine displacement cannot be less than 0'})
     horsepower = models.IntegerField(validators=[MinValueValidator(0)],
                                      error_messages={'min_value': 'Horsepower cannot be less than 0'})
     fuel_type = models.CharField(max_length=20,

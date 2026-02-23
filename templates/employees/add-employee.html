@@ -4,7 +4,7 @@
 {% block content %}
     <div class="form-style">
         <h1>Add employee</h1>
-        <form method="post">
+        <form method="post" novalidate>
             {% csrf_token %}
             {{ form.as_p }}
             <button class="add-button" type="submit">Add to staff</button>
