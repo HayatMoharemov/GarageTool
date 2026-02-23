@@ -1,3 +1,4 @@
+from django.core.validators import MinValueValidator
 from django.db import models
 from django.utils.text import slugify
 
@@ -22,11 +23,14 @@ class VehicleTypeBaseModel(TimeStampModel):
     model = models.CharField(max_length=50,
                              validators=[check_if_is_alpha])
     production_date = models.DateField()
-    mileage = models.BigIntegerField(validators=[check_if_is_positive])
+    mileage = models.BigIntegerField(validators=[MinValueValidator(0)],
+                                     error_messages={'min_value': 'Mileage cannot be less than 0'})
     engine_displacement = models.DecimalField(max_digits=4,
                                               decimal_places=1,
-                                              validators=[check_if_is_positive])
-    horsepower = models.IntegerField(validators=[check_if_is_positive])
+                                              validators=[MinValueValidator(0)],
+                                                          error_messages={'min_value': 'Engine displacement cannot be less than 0'})
+    horsepower = models.IntegerField(validators=[MinValueValidator(0)],
+                                     error_messages={'min_value': 'Horsepower cannot be less than 0'})
     fuel_type = models.CharField(max_length=20,
                                  choices=VehicleFuelChoices.choices)
     repair_status = models.BooleanField(default=False)

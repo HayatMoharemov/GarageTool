@@ -16,16 +16,16 @@ class EmployeeModel(models.Model):
                                   validators=[check_if_is_alpha])
     last_name = models.CharField(max_length=50,
                                   validators=[check_if_is_alpha])
-    age = models.IntegerField(validators=[MinValueValidator(18,
-                                                            message='Employees must be at least 18 years old.')])
+    age = models.IntegerField(validators=[MinValueValidator(18)],
+                                                            error_messages={'min_value':'Employees must be at least 18 years old.'})
     hourly_wage = models.DecimalField(max_digits=5,
                                       decimal_places=2,
-                                      validators=[MinValueValidator(0,
-                                                                    message='Hourly wage cannot be less than 0')])
+                                      validators=[MinValueValidator(0)],
+                                                                    error_messages={'min_value':'Hourly wage cannot be less than 0'})
     hours_weekly = models.DecimalField(max_digits=3,
                                        decimal_places=1,
-                                       validators=[MinValueValidator(0,
-                                                                     message='Working hours cannot be less than 0')])
+                                       validators=[MinValueValidator(0)],
+                                                                     error_messages={'min_value':'Working hours cannot be less than 0'})
     hired_at = models.DateField()
     assigned_cars = models.ManyToManyField(CarModel,
                                            blank=True,
