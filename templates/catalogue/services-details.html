@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load currency %}
 {% block title %}GarageTool | Services Catalogue{% endblock %}
 {% block content %}
     <div class="titillium-font">
@@ -7,7 +8,7 @@
     </div>
     <div class="vehicle-card-details titillium-font">
         <p>{{ object.title }}</p>
-        <p>{{ object.price }}$</p>
+        <p>{{ object.price | currency }}</p>
         <p>
             {% if object.description %}
                 {{ object.description }}
@@ -15,6 +16,8 @@
                 No description
             {% endif %}
         </p>
-        <a class="edit-button" href="{% url 'catalogue:parts_list' %}" >Go back</a>
+        <a class="edit-button" href="{% url 'catalogue:edit_service' object.slug %}" >Edit</a>
+        <a class="edit-button" href="{% url 'catalogue:delete_service' object.slug %}" >Delete</a>
+        <a class="edit-button" href="{% url 'catalogue:services_list' %}" >Go back</a>
     </div>
 {% endblock %}

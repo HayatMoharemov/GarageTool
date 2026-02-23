@@ -10,11 +10,11 @@ from garage.models import MotorcycleModel, CarModel
 class ViewGarage(ListView):
     template_name = 'garage/view-garage.html'
     context_object_name = 'vehicles'
-    paginate_by = 10
+    paginate_by = 12
 
     def get_queryset(self):
 
-        qs = self.request.GET.get('?q', '')
+        qs = self.request.GET.get('q', '')
 
         vehicles = []
 

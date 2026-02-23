@@ -20,7 +20,6 @@
     border-color: red;
 }
 
-/* по-елегантна отметка */
 .custom-checkbox input[type="checkbox"]:checked::after {
     content: "";
     position: absolute;

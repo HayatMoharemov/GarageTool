@@ -2,7 +2,7 @@ from django.db.models import Q
 from django.http import Http404
 from django.shortcuts import render
 from django.urls import reverse_lazy
-from django.views.generic import ListView, DetailView, TemplateView, CreateView
+from django.views.generic import ListView, DetailView, TemplateView, CreateView, UpdateView, DeleteView
 
 from catalogue.forms import ServiceForm
 from catalogue.models import PartModel, ServiceModel
@@ -28,7 +28,7 @@ class ServicesDetails(DetailView):
 class ServicesList(ListView):
     template_name = 'catalogue/services-list.html'
     context_object_name = 'services'
-    paginate_by = 10
+    paginate_by = 12
 
     def get_queryset(self):
         qs = self.request.GET.get('q', '')
@@ -43,7 +43,7 @@ class ServicesList(ListView):
 class PartsList(ListView):
     template_name = 'catalogue/parts-list.html'
     context_object_name = 'parts'
-    paginate_by = 10
+    paginate_by = 12
 
     def get_queryset(self):
 
@@ -78,3 +78,37 @@ class AddService(CreateView):
     form_class = ServiceForm
     template_name = 'catalogue/add-service.html'
     success_url = reverse_lazy('catalogue:services_list')
+
+class EditService(UpdateView):
+    template_name = 'catalogue/services-edit.html'
+    slug_url_kwarg = 'services_slug'
+    slug_field = 'slug'
+    form_class = ServiceForm
+
+    def get_object(self, queryset=None):
+
+        slug = self.kwargs.get(self.slug_url_kwarg)
+
+        service = ServiceModel.objects.filter(slug=slug).first()
+
+        if service:
+            return service
+
+        raise Http404('Service not found')
+
+
+class DeleteService(DeleteView):
+    template_name = 'catalogue\services-delete.html'
+    slug_url_kwarg = 'services_slug'
+    success_url = reverse_lazy('catalogue:services_list')
+
+    def get_object(self, queryset=None):
+
+        slug = self.kwargs.get(self.slug_url_kwarg)
+
+        service = ServiceModel.objects.filter(slug=slug).first()
+
+        if service:
+            return service
+
+        raise Http404('Service not found')

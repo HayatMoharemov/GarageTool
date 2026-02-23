@@ -10,7 +10,7 @@ from employees.models import EmployeeModel
 class ViewEmployees(ListView):
     template_name = 'employees/employees-list.html'
     context_object_name = 'employees'
-    paginate_by = 10
+    paginate_by = 12
 
     def get_queryset(self):
 
