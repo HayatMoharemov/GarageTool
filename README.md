@@ -3,24 +3,24 @@
 GarageTool is a **Django-based web application** designed to help manage garage / auto service businesses. It provides tools for vehicle service tracking, employee management, parts catalogue/inventory, and service-related calculations.
 
 ## Table of Contents
-- [1. Features](#features)
-- [2. Tech Stack](#tech-stack)
-- [3. Project Structure](#project-structure)
-- [4. Quick Start](#quick-start)
-- [5. Main URLs](#main-urls)
-- [6. Database Structure](#database-structure)
-  - [6.1 Models](#models)
-  - [6.2 Relationships](#relationships)
-  - [6.3 Forms](#forms)
-  - [6.4 Validators](#validators)
-- [7. Views](#views)
-- [8. Templates and Styling](#templates-and-styling)
-- [9. Data Seeding](#data-seeding)
+- [Features](#features)
+- [Tech Stack](#tech-stack)
+- [Project Structure](#project-structure)
+- [Quick Start](#quick-start)
+- [Main URLs](#main-urls)
+- [Database Structure](#database-structure)
+  - [Models](#models)
+  - [Relationships](#relationships)
+  - [Forms](#forms)
+  - [Validators](#validators)
+- [Views](#views)
+- [Templates and Styling](#templates-and-styling)
+- [Data Seeding](#data-seeding)
 - [Post Scriptum](#post-scriptum)
 
 
 
-## 1. Features
+## Features
 
 - **Garage** module – manage vehicles, service orders, service history
 - **Employees** module – track mechanics, work hours, manage employees
@@ -28,13 +28,13 @@ GarageTool is a **Django-based web application** designed to help manage garage 
 - **Calculator** module – service cost estimation, labor + parts calculation
 - **Common** utilities – shared models, helpers, or base functionality
 
-## 2. Tech Stack
+## Tech Stack
 
 - **Backend**: Django (Python)
 - **Frontend**: HTML + CSS (Bootstrap or custom styles possible)
 - **Database**: PostgreSQL
 
-## 3. Project Structure
+## Project Structure
 
 ```markdown
 GarageTool/
@@ -51,7 +51,7 @@ GarageTool/
 ```
 
 
-## 4. Quick Start
+## Quick Start
 
 1. Clone the repository
 
@@ -91,7 +91,7 @@ python manage.py runserver
 - Open → http://127.0.0.1:8000/
 - Admin panel → http://127.0.0.1:8000/admin/
 
-## 5. Main URLs (example – depends on your urls.py)
+## Main URLs
 
 - `/`            → Home 
 - `/garage/`     → Vehicles & Vehicle management 
@@ -100,8 +100,8 @@ python manage.py runserver
 - `/calculator/` → Service cost calculator 
 - `/admin/`      → Django admin
 
-## 6. Database structure
-### 6.1 Models
+## Database structure
+### Models
 - **TimeStampModel** - Base model for BaseVehicle (possible reusability with other models in future).
 - **BaseVehicle** - Base model (Parent class) for Cars and Motorcycles.
 - **CarModel** and **MotorcycleModel** - Inheriting BaseVehicle and its attributes and some unique ones for each type.
@@ -110,7 +110,7 @@ python manage.py runserver
 - **PartsModel** and **ServicesModel** - Inheriting BaseProduct. Models for parts and services available.
 - **CalculatorModel** - Model used to calculate costs for the client.
 
-### 6.2 Relationships
+### Relationships
 
 - Calculator → Car  
   (one calculator can link to one car – optional)
@@ -127,7 +127,7 @@ python manage.py runserver
 **Simple rule:**  
 Each calculation/offer picks **one vehicle** (car or motorcycle) + any number of **parts** and **services**.
 
-### 6.3 Forms
+### Forms
 #### Garage app
 - **BaseForm** - BaseForm for vehicles
 - **CarForm** and **MotorcycleForm**  - Inherited from BaseForm
@@ -136,7 +136,7 @@ Each calculation/offer picks **one vehicle** (car or motorcycle) + any number of
 #### Catalogue app
 - **ServicesForm**
 
-### 6.4 Validators
+### Validators
 
 Validators make sure bad data cannot be saved.
 
@@ -155,14 +155,14 @@ Most important validators are in:
 
 They show clear error messages when something is wrong.
 
-## 7. Views
+## Views
 
 - **CreateView, DeleteView, UpdateView, ListView** implemented appropriately in the project.
 - Mostly **Class Based Views**. They automatically validate forms and handle GET and POST methods.
 - Successful implementation of **redirect**
 
-## 8. Templates and styling
-### 8.1 Base templates
+## Templates and styling
+### Base templates
 - The project has ```base.html``` as a base HTML file and is being inherited by every template in the project.
 - ```footer.html``` and ```navbar.html``` are also shared across the templates in the project.
 ```text
@@ -170,7 +170,7 @@ templates/base.html
 templates/shared/footer.html
 templates/shared/navbar.html
 ```
-### 8.2 Templatetags & Filters
+### Templatetags & Filters
 
 #### Pagination
 ```common\templatetags\pagination.py```
@@ -181,7 +181,7 @@ templates/shared/navbar.html
 - For the calculation purposes of the project, since it also depends on calculations as a part of its functionality, there is a custom ```currency.py``` filter.
 It can be used in templates to automatically add the currency, which can also be changed in the filter itself.
 
-### 8.3 Template types
+### Template types
 
 - 22 **Templates** (Excluding ```navbar.html```,```footer.html```,```base.html```,```paginator.html```)
   - 20 **Dynamic Templates**
@@ -190,7 +190,7 @@ It can be used in templates to automatically add the currency, which can also be
 - Custom **404** page.
 - No orphan pages
 
-## 9. Data seeding
+## Data seeding
 
 - In the ```manage.py``` file there is already preloaded scripts that will automatically seed the DB with data.
 In order to run the script, please uncomment the code from line ```28``` and after running the data should be seeded.
