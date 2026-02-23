@@ -17,8 +17,9 @@
         </a>
     {% empty %}
         <div class="vehicle-empty-list titillium-font">
-            <p>No parts or services available in the catalogue.</p>
+            <p>No such parts or services.</p>
             <a class="go-back-button" href="{% url 'catalogue:parts_list' %}">Back</a>
+            <a class="go-back-button" href="{% url 'catalogue:add_service' %}">Add service</a>
         </div>
     {% endfor %}
 </div>

@@ -8,6 +8,7 @@
             <input class="input" type="search" name="q" placeholder="Search by service name" value="{{ request.GET.q }}">
             <button class="search-button" type="submit">Search</button>
             <a class="search-button" href="{% url 'catalogue:catalogue_initial_page' %}">Back</a>
+            <a class="search-button" href="{% url 'catalogue:add_service' %}">Add service</a>
         </form>
     {% endif %}
     <div class="vehicle titillium-font">
@@ -17,8 +18,9 @@
         </a>
     {% empty %}
         <div class="vehicle-empty-list titillium-font">
-            <p>No parts or services available in the catalogue.</p>
+            <p>No such parts or services.</p>
             <a class="go-back-button" href="{% url 'catalogue:catalogue_initial_page' %}">Back</a>
+            <a class="go-back-button" href="{% url 'catalogue:add_service' %}">Add service</a>
         </div>
     {% endfor %}
 </div>

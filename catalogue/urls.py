@@ -1,6 +1,6 @@
 from django.urls import path
 
-from catalogue.views import PartsList, PartsDetails, ServicesList, ServicesDetails, CatalogueLanding
+from catalogue.views import PartsList, PartsDetails, ServicesList, ServicesDetails, CatalogueLanding, AddService
 
 app_name = 'catalogue'
 
@@ -10,4 +10,5 @@ urlpatterns = [
     path('parts_list', PartsList.as_view(),name='parts_list'),
     path('details/parts/<slug:parts_slug>', PartsDetails.as_view(), name='parts_details'),
     path('details/services/<slug:services_slug>', ServicesDetails.as_view(),name='services_details'),
+    path('add_service/', AddService.as_view(),name='add_service' ),
 ]

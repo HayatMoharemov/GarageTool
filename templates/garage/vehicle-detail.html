@@ -10,6 +10,7 @@
         <p><strong>Model:</strong> {{ object.model }}</p>
         <p><strong>Production year:</strong> {{ object.production_date }}</p>
         <p><strong>Mileage:</strong> {{ object.mileage }} km</p>
+        <p><strong>Fuel type:</strong> {{ object.get_fuel_type_display }}</p>
         <p><strong>Horsepower:</strong> {{ object.horsepower }} hp</p>
         {% if object.type == 'CAR' %}
             <p><strong>Fuel type:</strong> {{ object.fuel_type }}</p>
@@ -18,7 +19,7 @@
             <p><strong>Engine type:</strong> {{ object.engine_type }}</p>
             <p><strong>Engine displacement:</strong> {{ object.engine_displacement }}cc</p>
         {% endif %}
-            <strong>Repair status:</strong>
+        <strong>Repair status:</strong>
             {% if object.repair_status %}Repaired
             {% else %}Not repaired
             {% endif %}

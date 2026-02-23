@@ -1,8 +1,10 @@
 from django.db.models import Q
 from django.http import Http404
 from django.shortcuts import render
-from django.views.generic import ListView, DetailView, TemplateView
+from django.urls import reverse_lazy
+from django.views.generic import ListView, DetailView, TemplateView, CreateView
 
+from catalogue.forms import ServiceForm
 from catalogue.models import PartModel, ServiceModel
 
 class CatalogueLanding(TemplateView):
@@ -50,7 +52,7 @@ class PartsList(ListView):
         part = PartModel.objects.all()
 
         if qs:
-            part = part.filter(Q(title__icontains=qs) | Q(manufacturer__icontains=qs))
+            part = part.filter(Q(title__icontains=qs))
 
         return part
 
@@ -70,3 +72,9 @@ class PartsDetails(DetailView):
             return part
 
         raise Http404('Part not found')
+
+class AddService(CreateView):
+    model = ServiceModel
+    form_class = ServiceForm
+    template_name = 'catalogue/add-service.html'
+    success_url = reverse_lazy('catalogue:services_list')
