@@ -2,13 +2,13 @@ from django.core.validators import MinValueValidator
 from django.db import models
 from django.utils.text import slugify
 
-from common.validators import check_if_is_alpha
+from common.validators import check_if_is_alphanum
 
 
 class BaseProduct(models.Model):
 
     title = models.CharField(max_length=50,
-                             validators=[check_if_is_alpha])
+                             validators=[check_if_is_alphanum])
     price = models.DecimalField(max_digits=6,
                                 decimal_places=2,
                                 validators=[MinValueValidator(0,

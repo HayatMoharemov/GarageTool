@@ -3,7 +3,7 @@ from django.db import models
 from django.utils.text import slugify
 
 from common.models import TimeStampModel
-from common.validators import check_if_is_positive, check_if_is_alpha
+from common.validators import check_if_is_alphanum
 
 
 class VehicleTypeBaseModel(TimeStampModel):
@@ -20,7 +20,7 @@ class VehicleTypeBaseModel(TimeStampModel):
                             choices=VehicleTypeChoices.choices)
     make = models.CharField(max_length=50)
     model = models.CharField(max_length=50,
-                             validators=[check_if_is_alpha])
+                             validators=[check_if_is_alphanum])
     production_date = models.DateField()
     mileage = models.BigIntegerField(validators=[MinValueValidator(0)],
                                      error_messages={'min_value': 'Mileage cannot be less than 0'})
