@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block title %} GarageTool | Employees {% endblock %}
+{% load static %}
+{% block content %}
+    <h1 class="text-h titillium-font">Employees</h1>
+    {% if employees %}
+        <form class="search-form" method="get">
+            <input class="input" type="search" name="?q" placeholder="Search by first or last name" value="{{ request.GET.q }}">
+            <button class="search-button" type="submit">Search</button>
+            <a href="{% url 'employees:add_employee' %}" class="search-button" type="submit">Add new employee</a>
+        </form>
+    {% endif %}
+    <div class="vehicle titillium-font">
+    {% for e in employees %}
+        <a href="{% url 'employees:employee_details' e.slug %}" class="vehicle-card">
+            <span>{{ e.first_name }} {{ e.last_name }}</span>
+            <p><strong>Recruited on:</strong> {{ e.hired_at }}</p>
+        </a>
+    {% empty %}
+        <p class="empty-text titillium-font">
+            You haven't added any employees yet.
+            You can do that from the following button:
+        </p>
+        <div class="vehicle-empty-list">
+            <a class="edit-button" href="{% url 'employees:add_employee' %}">Add employee</a>
+        </div>
+    {% endfor %}
+</div>
+{% include 'common/paginator.html' %}
+{% endblock %}
+

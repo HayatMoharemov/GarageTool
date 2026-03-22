@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block title %}GarageTool | My Garage{% endblock %}
+{% load static %}
+{% block content %}
+    <h1 class="text-h titillium-font">My Garage</h1>
+    {% if vehicles %}
+        <form class="search-form" method="get">
+            <input class="input" type="search" name="?q" placeholder="Search by make or model" value="{{ request.GET.q }}">
+            <button class="search-button" type="submit">Search</button>
+            <a href="{% url 'common:home' %}" class="search-button" type="submit">Add new vehicle</a>
+        </form>
+    {% endif %}
+    <div class="vehicle titillium-font">
+    {% for v in vehicles %}
+        <a href="{% url 'garage:vehicle_detail' v.slug %}" class="vehicle-card">
+            <span>{{ v.make }} {{ v.model }}</span>
+            <p><strong>Added on:</strong> {{ v.created_at }}</p>
+        </a>
+    {% empty %}
+        <div class="vehicle-empty-list titillium-font">
+            <p>No vehicles.</p>
+            <a class="go-back-button" href="{% url 'garage:add_car' %}">Add car</a>
+            <a class="go-back-button" href="{% url 'garage:add_bike'%}">Add Motorcycle</a>
+        </div>
+    {% endfor %}
+</div>
+{% include 'common/paginator.html' %}
+{% endblock %}

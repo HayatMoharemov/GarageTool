@@ -1,0 +1,22 @@
+{% load static %}
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+  <div class="container-fluid">
+    <ul class="navbar-nav d-flex flex-row mx-auto">
+        <li class="nav-item me-4">
+            <a class="nav-link neon-text" aria-current="page" href="{% url 'common:home' %}">Home</a>
+        </li>
+        <li class="nav-item me-4">
+            <a class="nav-link neon-text" aria-current="page" href="{% url 'garage:view_garage' %}">My Garage</a>
+        </li>
+        <li class="nav-item me-4">
+            <a class="nav-link neon-text" aria-current="page" href="{% url 'catalogue:catalogue_initial_page' %}">Catalogue</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link neon-text" aria-current="page" href="{% url 'calculator:create_offer' %}">Expenses Calculator</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link neon-text" aria-current="page" href="{% url 'employees:employees_list' %}">Employees</a>
+        </li>
+    </ul>
+  </div>
+</nav>
