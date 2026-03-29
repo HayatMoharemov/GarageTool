@@ -2,6 +2,7 @@
 {% load static %}
 
 {% block content %}
+    {% if request.user.is_authenticated %}
     <div class="buttons-container">
         <a class="btn-card" href="{% url 'garage:add_bike' %}">
             <img src="{% static "images/bike-button.png" %}" alt="Bike Logo">
@@ -20,4 +21,14 @@
             and <em>track the full service history</em> of each vehicle.
         </p>
     </div>
+    {% else %}
+        <div class="information">
+            <p>
+                With the <strong>GarageTool</strong> application, you can easily manage all cars and motorcycles that come in for repair or maintenance.
+                You can <strong>add</strong> new vehicles with details such as make, model and type of service,
+                <strong>update</strong> their information when changes occur, <strong>remove</strong> completed or canceled entries,
+                and <em>track the full service history</em> of each vehicle.
+            </p>
+        </div>
+    {% endif %}
 {% endblock %}

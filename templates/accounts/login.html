@@ -1,1 +1,17 @@
 {% extends 'base.html' %}
+{% block content %}
+    <div class="login-register">
+        <form method="post">
+            {% csrf_token %}
+            
+            <p>Email:</p>{{ form.username }}
+            
+            <p>Password:</p>{{ form.password }}
+
+            <button type="submit">Log in</button>
+        </form>
+    </div>
+    <div class="uno-reverse">
+        <p>You don't have an account yet? <a href="{% url 'accounts:register' %}">Register</a> now!</p>
+    </div>
+{% endblock %}

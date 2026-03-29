@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="edit-acc">
+    <h1>Edit Profile</h1>
+    
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        
+        <button type="submit">Save Changes</button>
+        <a href="{% url 'accounts:details' request.user.pk %}">Cancel</a>
+    </form>
+</div>
+{% endblock %}

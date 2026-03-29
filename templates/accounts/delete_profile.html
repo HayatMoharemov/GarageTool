@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block title %}GarageTool | Delete Profile{% endblock %}
+{% block content %}
+<div class="delete-profile">
+    <p class="text-h titillium-font">
+        {% if request.user.is_business %}
+            {{ request.user.company_name }}
+        {% elif request.user.is_individual %}
+            {{ request.user.first_name }} {{ request.user.last_name }}
+        {% endif %}
+        , are you sure you want to delete this {{ request.user.get_type_display }} profile?
+    </p>
+
+    <form method="post">
+        {% csrf_token %}
+        <div class="delete-buttons">
+            <button class="edit-button" type="submit">Delete</button>
+            <a class="edit-button" href="{% url 'accounts:details' request.user.pk %}">Cancel</a>
+        </div>
+    </form>
+</div>
+{% endblock %}

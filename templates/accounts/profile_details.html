@@ -1,1 +1,23 @@
 {% extends 'base.html' %}
+{% block content %}
+<div class="profile-details">
+    <h1>My Account</h1>
+
+    <p><strong>Email:</strong> {{ request.user.email }}</p>
+    <p><strong>Account type:</strong> {{ request.user.get_type_display }}</p>
+    <p><strong>Joined on:</strong> {{ request.user.created_at }}</p>
+    <h3>Information</h3>
+
+    {% if request.user.is_business and request.user.businessuser %}
+        <p><strong>Company name:</strong> {{ request.user.businessuser.company_name }}</p>
+        <p><strong>Tax number:</strong> {{ request.user.businessuser.tax_number }}</p>
+
+    {% elif request.user.is_individual %}
+        <p><strong>First name:</strong> {{ request.user.first_name }}</p>
+        <p><strong>Last name:</strong> {{ request.user.last_name }}</p>
+    {% endif %}
+
+    <br>
+    <a href="{% url 'accounts:edit' request.user.pk %}" class="btn">Edit Profile</a>
+</div>
+{% endblock %}
