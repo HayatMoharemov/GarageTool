@@ -17,6 +17,6 @@ def check_if_is_legal_age(value):
     return value
 
 def check_if_is_alphanum(value):
-    if not value.isalphanum():
+    if not value.isalnum():
         raise ValidationError('Can be only letters and numbers.')
     return value

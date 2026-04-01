@@ -2,7 +2,7 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 
 from GarageTool import settings
-from accounts.models import GeneralUser, BusinessUser, IndividualUser
+from accounts.models import BusinessUser, IndividualUser
 
 '''
 Signal that automatically creates a profile for a new GeneralUser.

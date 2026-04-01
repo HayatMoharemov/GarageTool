@@ -7,7 +7,7 @@ from garage.models import CarModel, VehicleTypeBaseModel, MotorcycleModel
 class BaseForm(forms.ModelForm):
     class Meta:
         model = VehicleTypeBaseModel
-        fields = '__all__'
+        exclude = ['owner']
         widgets = {
             'make': forms.TextInput(attrs={'placeholder': 'Enter make'}),
             'model': forms.TextInput(attrs={'placeholder': 'Enter model'}),

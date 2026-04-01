@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Q
 from django.http import Http404
 from django.urls import reverse_lazy, reverse
@@ -18,10 +19,13 @@ class ViewGarage(ListView):
 
         vehicles = []
 
-        motorcycles = MotorcycleModel.objects.all()
+        motorcycles = MotorcycleModel.objects.filter(owner=self.request.user)
+
         if qs:
             motorcycles = motorcycles.filter(Q(make__icontains=qs) | Q(model__icontains=qs))
-        cars = CarModel.objects.all()
+
+        cars = CarModel.objects.filter(owner=self.request.user)
+
         if qs:
             cars = cars.filter(Q(make__icontains=qs) | Q(model__icontains=qs))
 
@@ -33,13 +37,19 @@ class ViewGarage(ListView):
 
         return vehicles
 
-class AddBike(CreateView):
+class VehicleCreateBaseView(CreateView):
+
+    def form_valid(self, form):
+        form.instance.owner = self.request.user
+        return super().form_valid(form)
+
+class AddBike(VehicleCreateBaseView):
     model = MotorcycleModel
     form_class = MotorcycleForm
     template_name = 'garage/add-bike.html'
     success_url = reverse_lazy('garage:view_garage')
 
-class AddCar(CreateView):
+class AddCar(VehicleCreateBaseView, LoginRequiredMixin):
     model = CarModel
     form_class = CarForm
     template_name = 'garage/add-car.html'

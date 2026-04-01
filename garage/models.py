@@ -2,6 +2,7 @@ from django.core.validators import MinValueValidator
 from django.db import models
 from django.utils.text import slugify
 
+from accounts.models import GeneralUser
 from common.models import TimeStampModel
 from common.validators import check_if_is_alphanum
 
@@ -16,6 +17,9 @@ class VehicleTypeBaseModel(TimeStampModel):
         PETROL = 'PET', 'Petrol'
         DIESEL = 'DIESEL', 'Diesel'
 
+    owner = models.ForeignKey(GeneralUser,
+                              on_delete=models.CASCADE,
+                              related_name='%(class)s_vehicles')
     type = models.CharField(max_length=15,
                             choices=VehicleTypeChoices.choices)
     make = models.CharField(max_length=50)
