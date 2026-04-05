@@ -33,3 +33,13 @@
     gap: 20px;
     margin-top: 20px;
 }
+
+.text-header-welcome {
+    color: #ffffff;
+    text-align: center;
+    font-size: 2.5rem;
+    padding: 0.5rem 1rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    font-family: "Titillium Web", sans-serif;
+}
