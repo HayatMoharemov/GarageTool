@@ -11,6 +11,9 @@
                     <a class="nav-link neon-text" aria-current="page" href="{% url 'accounts:details' request.user.pk %}">My Account</a>
                 </li>
                 <li class="nav-item me-4">
+                    <a class="nav-link neon-text" aria-current="page" href="{% url 'contact:inquiries' %}">Inquiries</a>
+                </li>
+                <li class="nav-item me-4">
                     <a class="nav-link neon-text" aria-current="page" href="{% url 'garage:view_garage' %}">My Garage</a>
                 </li>
                 <li class="nav-item me-4">
@@ -22,10 +25,10 @@
                 <li class="nav-item">
                     <a class="nav-link neon-text" aria-current="page" href="{% url 'employees:employees_list' %}">Employees</a>
                 </li>
-                <li class="nav-item me-4">
-                    <form method="post" action="{% url 'accounts:logout' %}">
+                <li class="nav-item me-4 d-flex align-items-center">
+                    <form method="post" action="{% url 'accounts:logout' %}" class="m-0 p-0">
                         {% csrf_token %}
-                        <button type="submit" class="nav-link neon-text " aria-current="page" >Logout</button>
+                        <button type="submit" class="nav-link neon-text logout-btn-inline">Logout</button>
                     </form>
                 </li>
             </ul>
@@ -45,9 +48,12 @@
                     <a class="nav-link neon-text" aria-current="page" href="{% url 'garage:view_garage' %}">My Garage</a>
                 </li>
                 <li class="nav-item me-4">
-                    <form method="post" action="{% url 'accounts:logout' %}">
+                    <a class="nav-link neon-text" aria-current="page" href="{% url 'accounts:companies_list' %}">Mechanic Shops</a>
+                </li>
+                <li class="nav-item me-4 d-flex align-items-center">
+                    <form method="post" action="{% url 'accounts:logout' %}" class="m-0 p-0">
                         {% csrf_token %}
-                        <button type="submit" class="nav-link neon-text"  aria-current="page" >Logout</button>
+                        <button type="submit" class="nav-link neon-text logout-btn-inline">Logout</button>
                     </form>
                 </li>
             </ul>
@@ -58,6 +64,9 @@
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
         <div class="container-fluid">
             <ul class="navbar-nav d-flex flex-row mx-auto">
+                <li class="nav-item me-4">
+                    <a class="nav-link neon-text" aria-current="page" href="{% url 'common:home' %}">Home</a>
+                </li>
                 <li class="nav-item me-4">
                     <a class="nav-link neon-text" aria-current="page" href="{% url 'accounts:login' %}">Login</a>
                 </li>

@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block title %}GarageTool | Mechanic Shops {% endblock %}
+{% load static %}
+{% block content %}
+    <h1 class="text-h titillium-font">Mechanic Shops</h1>
+    {% if companies %}
+        <form class="search-form" method="get">
+            <input class="input" type="search" name="?q" placeholder="Search by company name" value="{{ request.GET.q }}">
+            <button class="search-button" type="submit">Search</button>
+        </form>
+    {% endif %}
+    <div class="vehicle titillium-font">
+    {% for c in companies %}
+        <a href="{% url 'accounts:company_details' c.slug %}" class="vehicle-card">
+            <span>{{ c.company_name }}</span>
+        </a>
+    {% empty %}
+        <div class="vehicle-empty-list titillium-font">
+            <p>No mechanic shops.</p>
+        </div>
+    {% endfor %}
+</div>
+{% include 'common/paginator.html' %}
+{% endblock %}

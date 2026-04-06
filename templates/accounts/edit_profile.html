@@ -1,14 +1,16 @@
 {% extends 'base.html' %}
+{% block title %}GarageTool | Edit Profile{% endblock %}
 {% block content %}
-<div class="edit-acc">
+<div class="form-style">
     <h1>Edit Profile</h1>
-    
+
     <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
-        
-        <button type="submit">Save Changes</button>
-        <a href="{% url 'accounts:details' request.user.pk %}">Cancel</a>
+
+        <button type="submit" class="cancel-button">Save Changes</button>
+        <a href="{% url 'accounts:details' request.user.pk %}" class="cancel-button">Cancel</a>
+
     </form>
 </div>
 {% endblock %}

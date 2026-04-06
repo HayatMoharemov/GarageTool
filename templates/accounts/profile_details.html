@@ -1,23 +1,28 @@
 {% extends 'base.html' %}
+{% block title %}GarageTool | Profile Details {% endblock %}
 {% block content %}
-<div class="profile-details">
-    <h1>My Account</h1>
+    <h1 class="profile-text-h">My Account</h1>
+    <div class="profile-card-details titillium-font">
+        <p><strong>Email:</strong> {{ request.user.email }}</p>
+        <p><strong>Account type:</strong> {{ request.user.get_type_display }}</p>
+        <p><strong>Joined on:</strong> {{ request.user.created_at }}</p>
+    </div>
+    <h1 class="profile-text-h">Additional details</h1>
+    <div class="profile-card-details titillium-font">
+        {% if request.user.is_business and request.user.businessuser %}
+            <p><strong>Company name:</strong> {{ request.user.businessuser.company_name }}</p>
+            <p><strong>Tax number:</strong> {{ request.user.businessuser.tax_number }}</p>
 
-    <p><strong>Email:</strong> {{ request.user.email }}</p>
-    <p><strong>Account type:</strong> {{ request.user.get_type_display }}</p>
-    <p><strong>Joined on:</strong> {{ request.user.created_at }}</p>
-    <h3>Information</h3>
-
-    {% if request.user.is_business and request.user.businessuser %}
-        <p><strong>Company name:</strong> {{ request.user.businessuser.company_name }}</p>
-        <p><strong>Tax number:</strong> {{ request.user.businessuser.tax_number }}</p>
-
-    {% elif request.user.is_individual %}
-        <p><strong>First name:</strong> {{ request.user.first_name }}</p>
-        <p><strong>Last name:</strong> {{ request.user.last_name }}</p>
-    {% endif %}
+        {% elif request.user.is_individual %}
+            <p><strong>First name:</strong> {{ request.user.first_name }}</p>
+            <p><strong>Last name:</strong> {{ request.user.last_name }}</p>
+            <p><strong>Phone number:</strong> {{ request.user.individualuser.phone_number }}</p>
+        {% endif %}
+    </div>
 
     <br>
-    <a href="{% url 'accounts:edit' request.user.pk %}" class="btn">Edit Profile</a>
-</div>
+    <div class="btn-align">
+        <a href="{% url 'accounts:edit' request.user.pk %}" class="profile-edit-button">Edit Profile</a>
+        <a href="{% url 'accounts:delete' request.user.pk %}" class="profile-edit-button">Delete Profile</a>
+    </div>
 {% endblock %}

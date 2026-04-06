@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block title %}GarageTool | Inquiries{% endblock %}
+{% load static %}
+{% block content %}
+<h1 class="text-h titillium-font">Inquiries</h1>
+
+{% if inquiries %}
+    <ul class="vehicle-card-details titillium-font">
+        {% for inquiry in inquiries %}
+            <ul>
+                <p><strong>From:</strong> {{ inquiry.name.first_name }} {{ inquiry.name.last_name }}</p>
+                <p><strong>Description:</strong> {{ inquiry.description }}</p>
+                {% if inquiry.car %}
+                    <p><strong>Car:</strong> {{ inquiry.car.make }} {{ inquiry.car.model }}</p>
+                {% endif %}
+                {% if inquiry.motorcycle %}
+                    <p><strong>Motorcycle:</strong> {{ inquiry.motorcycle.make }} {{ inquiry.motorcycle.model }}</p>
+                {% endif %}
+                <p><strong>Sent on:</strong> {{ inquiry.created_at|date:"Y-m-d H:i" }}</p>
+                <form action="{% url 'contact:delete_inquiry' inquiry.pk %}" method="post" style="display:inline;">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                </form>
+                <form action="{% url 'contact:accept_inquiry' inquiry.pk %}" method="post" style="display:inline;">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-success">Accept Inquiry</button>
+                </form>
+                <hr>
+            </ul>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p class="vehicle-card-details titillium-font text-center">You have no inquiries yet.</p>
+{% endif %}
+
+{% include 'common/paginator.html' %}
+{% endblock %}

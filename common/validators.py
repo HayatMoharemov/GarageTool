@@ -1,5 +1,5 @@
 from django.core.exceptions import ValidationError
-
+import re
 
 def check_if_is_positive(value):
     if value < 0:
@@ -20,3 +20,9 @@ def check_if_is_alphanum(value):
     if not value.isalnum():
         raise ValidationError('Can be only letters and numbers.')
     return value
+
+def check_phone_number(value):
+    value = value.strip()
+    pattern = r'^\+?[1-9]\d{7,14}$'
+    if not re.match(pattern, value):
+        raise ValidationError('Enter a valid phone number.')

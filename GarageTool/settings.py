@@ -27,7 +27,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-
 # Application definition
 MY_APPS = [
     'common',
@@ -35,7 +34,9 @@ MY_APPS = [
     'calculator',
     'catalogue',
     'employees',
-    'accounts'
+    'accounts.apps.AccountsConfig',
+    'vehicles_api',
+    'contact',
 ]
 
 INSTALLED_APPS = [
@@ -45,6 +46,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
+    'django_filters',
 ] + MY_APPS
 
 MIDDLEWARE = [
@@ -77,6 +80,9 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'GarageTool.wsgi.application'
 
+REST_FRAMEWORK = {
+    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],
+}
 
 # Database
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases

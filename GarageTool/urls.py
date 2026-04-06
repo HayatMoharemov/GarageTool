@@ -25,4 +25,6 @@ urlpatterns = [
     path('catalogue/', include('catalogue.urls')),
     path('calculator/', include('calculator.urls')),
     path('', include('accounts.urls')),
+    path('', include('contact.urls', namespace='contact')),
+    path('api/', include('vehicles_api.urls')),
 ]

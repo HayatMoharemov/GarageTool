@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block title %}GarageTool | Company Details {% endblock %}
+{% block content %}
+    <h1 class="profile-text-h">MECHANIC SHOP DETAILS</h1>
+    <div class="profile-card-details titillium-font">
+        <p><strong>Company name:</strong> {{ object.company_name }}</p>
+        <p><strong>Email:</strong> {{ request.user.email }}</p>
+        <p><strong>Joined on:</strong> {{ request.user.created_at }}</p>
+        <p><strong>Tax number:</strong> {{ object.tax_number }}</p>
+    </div>
+
+    <br>
+    <div class="btn-align">
+        <a href="{% url 'accounts:companies_list'%}" class="profile-edit-button">Back</a>
+        <a href="{% url 'contact:contact_form' company_slug=object.slug %}" class="profile-edit-button">Contact</a>
+    </div>
+{% endblock %}

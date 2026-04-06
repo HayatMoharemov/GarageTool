@@ -3,12 +3,7 @@
 {% block content %}
 <div class="delete-profile">
     <p class="text-h titillium-font">
-        {% if request.user.is_business %}
-            {{ request.user.company_name }}
-        {% elif request.user.is_individual %}
-            {{ request.user.first_name }} {{ request.user.last_name }}
-        {% endif %}
-        , are you sure you want to delete this {{ request.user.get_type_display }} profile?
+         Are you sure you want to delete this profile?
     </p>
 
     <form method="post">

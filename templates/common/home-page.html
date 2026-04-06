@@ -3,24 +3,29 @@
 
 {% block content %}
     {% if request.user.is_authenticated %}
-    <div class="buttons-container">
-        <a class="btn-card" href="{% url 'garage:add_bike' %}">
-            <img src="{% static "images/bike-button.png" %}" alt="Bike Logo">
-            <span>Add bike</span>
-        </a>
-        <a class="btn-card" href="{% url 'garage:add_car' %}">
-            <img src="{% static "images/racecar-button.png" %}" alt="RaceCar Logo">
-            <span>Add car</span>
-        </a>
-    </div>
-    <div class="information">
-        <p>
-            With the <strong>GarageTool</strong> application, you can easily manage all cars and motorcycles that come in for repair or maintenance.
-            You can <strong>add</strong> new vehicles with details such as make, model and type of service,
-            <strong>update</strong> their information when changes occur, <strong>remove</strong> completed or canceled entries,
-            and <em>track the full service history</em> of each vehicle.
-        </p>
-    </div>
+        {% if request.user.is_business %}
+            <h1 class="text-header-welcome">Welcome {{ request.user.businessuser.company_name }}</h1>
+        {% else %}
+            <h1 class="text-header-welcome">Welcome {{ request.user.first_name }} {{ request.user.last_name }}</h1>
+        {% endif %}
+        <div class="buttons-container">
+            <a class="btn-card" href="{% url 'garage:add_bike' %}">
+                <img src="{% static "images/bike-button.png" %}" alt="Bike Logo">
+                <span>Add bike</span>
+            </a>
+            <a class="btn-card" href="{% url 'garage:add_car' %}">
+                <img src="{% static "images/racecar-button.png" %}" alt="RaceCar Logo">
+                <span>Add car</span>
+            </a>
+        </div>
+        <div class="information">
+            <p>
+                With the <strong>GarageTool</strong> application, you can easily manage all cars and motorcycles that come in for repair or maintenance.
+                You can <strong>add</strong> new vehicles with details such as make, model and type of service,
+                <strong>update</strong> their information when changes occur, <strong>remove</strong> completed or canceled entries,
+                and <em>track the full service history</em> of each vehicle.
+            </p>
+        </div>
     {% else %}
         <div class="information">
             <p>

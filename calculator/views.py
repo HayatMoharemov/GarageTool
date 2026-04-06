@@ -7,8 +7,11 @@ from garage.models import CarModel, MotorcycleModel
 
 
 def create_offer(request: HttpRequest) -> HttpResponse:
-    cars = CarModel.objects.all()
-    motorcycles = MotorcycleModel.objects.all()
+
+    user = request.user
+
+    cars = CarModel.objects.filter(owner=user)
+    motorcycles = MotorcycleModel.objects.filter(owner=user)
     parts = PartModel.objects.all()
     services = ServiceModel.objects.all()
 
