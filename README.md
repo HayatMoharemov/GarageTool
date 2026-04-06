@@ -14,6 +14,9 @@ GarageTool is a **Django-based web application** designed to help manage garage 
   - [Forms](#forms)
   - [Validators](#validators)
 - [Views](#views)
+- [Rest API](#rest-api)
+- [Signals](#signals)
+- [Async tasks](#async-tasks)
 - [Templates and Styling](#templates-and-styling)
 - [Data Seeding](#data-seeding)
 - [Post Scriptum](#post-scriptum)
@@ -94,6 +97,8 @@ python manage.py runserver
 ## Main URLs
 
 - `/`            → Home 
+- `/accounts/`   → Accounts management
+- `/contact/`    → Contact inquiries management
 - `/garage/`     → Vehicles & Vehicle management 
 - `/employees/`  → Staff & Staff management  
 - `/catalogue/`  → Parts & services catalogue + Management
@@ -109,8 +114,21 @@ python manage.py runserver
 - **BaseProduct** - Base model (Parent class) for Services and Parts.
 - **PartsModel** and **ServicesModel** - Inheriting BaseProduct. Models for parts and services available.
 - **CalculatorModel** - Model used to calculate costs for the client.
+- **BusinessUser & IndividualUser** - GeneralUser models for Business accounts and Individual accounts.
+- **ContactModel** - Model used for communication between IndividualUser and BusinessUser
 
 ### Relationships
+- User(Individual/Business) → Car
+  (one user can be linked to many cars )
+
+- User(Individual/Business) → Motorcycle
+  (one user can be linked to many motorcycles)
+
+- User(Individual/Business) → Contact(Inquiry)  
+  (IndividualUser is linked to the sender of the inquiry, BusinessUser is linked to receiver)
+
+- Company → Contact(Inquiry  
+  (one calculator can link to one car – optional)
 
 - Calculator → Car  
   (one calculator can link to one car – optional)
@@ -128,13 +146,20 @@ python manage.py runserver
 Each calculation/offer picks **one vehicle** (car or motorcycle) + any number of **parts** and **services**.
 
 ### Forms
+#### Accounts app
+- **GeneralUser** - UserCreation Form
+- **IndividualUser** - Type of GeneralUser
+- **BusinessUser** - Type of GeneralUser
 #### Garage app
 - **BaseForm** - BaseForm for vehicles
-- **CarForm** and **MotorcycleForm**  - Inherited from BaseForm
+- **CarForm** - Inherited from BaseForm
+- **MotorcycleForm**  - Inherited from BaseForm
 #### Employee app
 - **EmployeeForm**
 #### Catalogue app
 - **ServicesForm**
+#### Contact app
+- **ContactForm**
 
 ### Validators
 
@@ -160,7 +185,114 @@ They show clear error messages when something is wrong.
 - **CreateView, DeleteView, UpdateView, ListView** implemented appropriately in the project.
 - Mostly **Class Based Views**. They automatically validate forms and handle GET and POST methods.
 - Successful implementation of **redirect**
+- 
+## REST API
+The project includes a **REST API built with Django REST Framework**.
 
+Location:
+
+```
+vehicles_api/
+```
+
+### Example endpoints
+
+```
+/api/cars/
+/api/motorcycles/
+```
+
+### Filtering
+
+Example:
+
+```
+/api/cars/?make=BMW
+```
+
+### Ordering
+
+```
+/api/cars/?ordering=id
+```
+
+### Owner-based access
+
+Vehicles returned by the API are filtered using:
+
+```
+OwnerFilterMixin
+```
+
+This ensures users only see vehicles they own.
+
+### Serializers
+
+The API uses:
+
+```
+CarSerializer
+MotorcycleSerializer
+```
+
+to convert model instances into JSON.
+
+## Signals
+- `accounts\signals.py`
+
+  Signal that automatically creates a profile for a new GeneralUser.
+    - Triggered after a GeneralUser instance is created.
+    - If the user is a business, a BusinessUser profile is created.
+    - If the user is an individual, an IndividualUser profile is created.
+
+```
+    @receiver(post_save, sender=settings.AUTH_USER_MODEL)
+    def create_user_profile(sender, instance, created, **kwargs):
+        if created:
+            if instance.is_business:
+                BusinessUser.objects.create(
+                    user=instance
+                )
+            elif instance.is_individual:
+                IndividualUser.objects.create(
+                    user=instance
+                )
+```
+---
+```
+@receiver(post_migrate)
+def create_default_user_groups(sender, **kwargs):
+
+    if sender.name != 'accounts':
+        return
+
+    editor_group, created = Group.objects.get_or_create(name='Editor')
+
+    try:
+        CarModel = apps.get_model('garage', 'CarModel')
+        MotorcycleModel = apps.get_model('garage', 'MotorcycleModel')
+
+        car_permission = Permission.objects.get(content_type__app_label='garage', codename='change_carmodel')
+        moto_permission = Permission.objects.get(content_type__app_label='garage', codename='change_motorcyclemodel')
+
+        editor_group.permissions.set([car_permission, moto_permission])
+    except (LookupError, Permission.DoesNotExist):
+        pass
+
+    admin_group, created = Group.objects.get_or_create(name='Admin')
+    all_perms = Permission.objects.all()
+    admin_group.permissions.set(all_perms)
+
+```
+
+- Signal that automatically creates two User Groups in Django Admin upon making the first migrations.
+    - Editor Group (allowed to edit vehicles)
+    - Admin Group (full permissions)
+
+## Async tasks
+- `garage\tasks.py`
+    - A task that runs on the background and checks every 1 hour for unrepaired vehicles.
+    - Returns information for the unrepaired vehicles in the console. If none, returns that no vehicles need repair at the moment.
 ## Templates and styling
 ### Base templates
 - The project has ```base.html``` as a base HTML file and is being inherited by every template in the project.
@@ -183,8 +315,8 @@ It can be used in templates to automatically add the currency, which can also be
 
 ### Template types
 
-- 22 **Templates** (Excluding ```navbar.html```,```footer.html```,```base.html```,```paginator.html```)
-  - 20 **Dynamic Templates**
+- 32 **Templates** (Excluding ```navbar.html```,```footer.html```,```base.html```,```paginator.html```)
+  - 30 **Dynamic Templates**
   - 2 **Static Templates**
 - Appropriate **CSS** styling stored in ```static\css```
 - Custom **404** page.
@@ -194,8 +326,8 @@ It can be used in templates to automatically add the currency, which can also be
 ## Data seeding
 
 - In the ```manage.py``` file there are already preloaded scripts that will automatically seed the DB with data.
-In order to run the script, please uncomment the code from line ```28``` and after running the data should be seeded.
-
+In order to run the script, please uncomment the code from line ```25``` and after running the data should be seeded.
+The script is for Parts and Services app.
 ## Post Scriptum
 
 This project was developed by **Hayat Moharemov** as an assignment for the first part of Python Web courses in **SoftUni**.
