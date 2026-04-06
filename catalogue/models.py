@@ -7,8 +7,7 @@ from common.validators import check_if_is_alphanum
 
 class BaseProduct(models.Model):
 
-    title = models.CharField(max_length=50,
-                             validators=[check_if_is_alphanum])
+    title = models.CharField(max_length=50)
     price = models.DecimalField(max_digits=6,
                                 decimal_places=2,
                                 validators=[MinValueValidator(0,
