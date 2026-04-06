@@ -1,12 +1,13 @@
 from django import forms
 
 from employees.models import EmployeeModel
+from garage.models import CarModel, MotorcycleModel
 
 
 class EmployeeForm(forms.ModelForm):
     class Meta:
         model = EmployeeModel
-        fields = '__all__'
+        exclude = ['company', 'slug']
         widgets = {
             'first_name': forms.TextInput(attrs={
                 'placeholder': 'Enter employee first name'
@@ -30,3 +31,10 @@ class EmployeeForm(forms.ModelForm):
                 'type': 'date'
             })
         }
+
+    def __init__(self, *args, **kwargs):
+        user = kwargs.pop('user', None)
+        super().__init__(*args, **kwargs)
+        if user and hasattr(user, 'businessuser'):
+            self.fields['assigned_cars'].queryset = CarModel.objects.filter(owner=user)
+            self.fields['assigned_bikes'].queryset = MotorcycleModel.objects.filter(owner=user)
