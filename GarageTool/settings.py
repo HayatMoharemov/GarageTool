@@ -17,7 +17,7 @@ from dotenv import load_dotenv
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Load .env only if running locally
-load_dotenv(BASE_DIR / ".env")
+load_dotenv()
 
 # Django settings
 SECRET_KEY = os.getenv("SECRET_KEY")
