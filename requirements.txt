@@ -6,7 +6,7 @@ psycopg2==2.9.10
 psycopg2-binary==2.9.10
 sqlparse==0.5.5
 tzdata==2025.3
-django-filter==25.2
+django-filter==24.3
 django-contacts==0.6.0
 django-contrib-comments==1.8.0
 whitenoise==6.12.0
