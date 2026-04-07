@@ -11,27 +11,21 @@ https://docs.djangoproject.com/en/6.0/ref/settings/
 """
 import os
 from pathlib import Path
+from dotenv import load_dotenv
 
-
-import whitenoise.storage
-
-
-
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
+# BASE_DIR
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# Load .env only if running locally
+load_dotenv(BASE_DIR / ".env")
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/6.0/howto/deployment/checklist/
+# Django settings
+SECRET_KEY = os.getenv("SECRET_KEY")
+DEBUG = os.getenv("DEBUG") == "True"
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY='django-insecure-!&b4k+p%!3!h0-i&lg#@(+_dvrsd5-9efoz(=$=6&3w4j(6t'
+ALLOWED_HOSTS = [host for host in os.getenv("ALLOWED_HOSTS", "").split(",") if host]
+CSRF_TRUSTED_ORIGINS = [host for host in os.getenv("CSRF_TRUSTED_ORIGINS", "").split(",") if host]
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
-
-ALLOWED_HOSTS = ['127.0.0.1','localhost']
-CSRF_TRUSTED_ORIGINS = ['http://127.0.0.1','http://localhost']
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # Application definition
 MY_APPS = [
@@ -94,17 +88,15 @@ REST_FRAMEWORK = {
 # Database
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 
+# Database
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": "garagetool-database",
-        "USER": "hsnfgzrswi",
-        "PASSWORD": "AVtL7$H25LzPAGu5",
-        "HOST": "garagetool-server.postgres.database.azure.com",
-        "PORT": "5432",
-        "OPTIONS": {
-                    "sslmode": "require"
-        },
+        "NAME": os.getenv("DB_NAME"),
+        "USER": os.getenv("DB_USER"),
+        "PASSWORD": os.getenv("DB_PASS"),
+        "HOST": os.getenv("DB_HOST"),
+        "PORT": os.getenv("DB_PORT", "5432"),
     }
 }
 
