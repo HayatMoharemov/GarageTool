@@ -84,6 +84,7 @@ class EditService(UpdateView):
     slug_url_kwarg = 'services_slug'
     slug_field = 'slug'
     form_class = ServiceForm
+    success_url = reverse_lazy('catalogue:services_list')
 
     def get_object(self, queryset=None):
 
