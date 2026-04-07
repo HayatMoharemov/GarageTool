@@ -81,15 +81,19 @@ source venv/bin/activate
 ```bash
 pip install -r requirements.txt
 ```
-4. Apply migrations
+---
+4. .env Template
+    `GarageTool\.env.template` File is a .env template file, where you can add your own .env data.
+---
+5. Apply migrations
 ```bash
 python manage.py migrate
 ```
-5. Create superuser(optional)
+6. Create superuser(optional)
 ```bash
 python manage.py createsuperuser
 ```
-6. Run the server
+7. Run the server
 ```bash
 python manage.py runserver
 ```
