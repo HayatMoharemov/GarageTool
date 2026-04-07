@@ -97,11 +97,14 @@ REST_FRAMEWORK = {
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": "garagetool",
-        "USER": "postgres-user",
-        "PASSWORD": "password",
-        "HOST": "127.0.0.1",
+        "NAME": "garagetool-database",
+        "USER": "hsnfgzrswi",
+        "PASSWORD": "AVtL7$H25LzPAGu5",
+        "HOST": "garagetool-server.postgres.database.azure.com",
         "PORT": "5432",
+        "OPTIONS": {
+                    "sslmode": "require"
+        },
     }
 }
 
