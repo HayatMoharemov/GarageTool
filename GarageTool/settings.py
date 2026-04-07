@@ -9,8 +9,10 @@ https://docs.djangoproject.com/en/6.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/6.0/ref/settings/
 """
-
+import os
 from pathlib import Path
+
+import whitenoise.storage
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -23,9 +25,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-!&b4k+p%!3!h0-i&lg#@(+_dvrsd5-9efoz(=$=6&3w4j(6t#8'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['garagetool.azurewebsites.net']
 
 # Application definition
 MY_APPS = [
@@ -51,6 +53,7 @@ INSTALLED_APPS = [
 ] + MY_APPS
 
 MIDDLEWARE = [
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -90,10 +93,10 @@ REST_FRAMEWORK = {
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": "garagetool",
-        "USER": "postgres-user",
-        "PASSWORD": "password",
-        "HOST": "127.0.0.1",
+        "NAME": "garagetool-database",
+        "USER": "h.moharemov@icloud.com",
+        "PASSWORD": "160895Eonora",
+        "HOST": "garagetool-server.postgres.database.azure.com",
         "PORT": "5432",
     }
 }
@@ -136,7 +139,14 @@ LOGOUT_REDIRECT_URL = 'accounts:login'
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STORAGES = {
+    'staticfiles': {
+        'BACKEND':
+            'whitenoise.storage.CompressedManifestStaticFilesStorage'
+    },
+}
 STATICFILES_DIRS = [
     BASE_DIR / "static",
 ]
