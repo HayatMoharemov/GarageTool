@@ -9,4 +9,4 @@ tzdata==2025.3
 django-filter==24.3
 django-contacts==0.6.0
 django-contrib-comments==1.8.0
-whitenoise==6.12.0
+whitenoise==6.7.0
