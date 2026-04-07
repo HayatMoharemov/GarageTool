@@ -89,12 +89,11 @@ class CompanyDetailView(DetailView):
     template_name = 'accounts/company_details.html'
     slug_field = 'slug'
     slug_url_kwarg = 'company_slug'
+    context_object_name = 'company'
 
     def get_object(self, queryset=None):
         slug = self.kwargs.get('company_slug')
-
         company = BusinessUser.objects.filter(slug=slug).first()
         if company:
             return company
-
         raise Http404('No such company!')

@@ -3,9 +3,9 @@
 {% block content %}
     <h1 class="profile-text-h">MECHANIC SHOP DETAILS</h1>
     <div class="profile-card-details titillium-font">
-        <p><strong>Company name:</strong> {{ object.company_name }}</p>
-        <p><strong>Email:</strong> {{ object.email }}</p>
-        <p><strong>Joined on:</strong> {{ object.created_at }}</p>
+        <p><strong>Company name:</strong> {{ company.company_name }}</p>
+        <p><strong>Email:</strong> {{ company.user.email }}</p>
+        <p><strong>Joined on:</strong> {{ company.user.created_at }}</p>
         <p><strong>Tax number:</strong> {{ object.tax_number }}</p>
     </div>
 
