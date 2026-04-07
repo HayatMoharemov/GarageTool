@@ -1,0 +1,59 @@
+.profile-card-details {
+    max-width: 500px;
+    margin: 40px auto;
+    padding: 30px;
+    color: white;
+    font-family: "Titillium Web", sans-serif;
+    line-height: 1.6;
+}
+
+.vehicle-card-details p {
+    margin: 8px 0;
+}
+
+.profile-edit-button {
+    display: inline-block;
+    padding: 12px 20px;
+    border-radius: 12px;
+    border: 2px solid red;
+    background-color: transparent;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    margin: auto;
+}
+
+.profile-edit-button:hover {
+    background-color: rgba(255, 0, 0, 0.2);
+    color: #fff;
+    box-shadow: 0 0 10px rgba(255, 0, 0, 0.4);
+    transform: translateY(-2px);
+}
+
+.profile-titillium-font {
+    font-size: 1.2rem;
+    padding: 0.5rem 1rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    font-family: "Titillium Web", sans-serif;
+}
+
+.profile-titillium-web-extralight {
+  font-family: "Titillium Web", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.profile-text-h {
+    color: #ffffff;
+    text-align: center;
+    font-size: 3.0rem;
+    font-family: "Titillium Web", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.btn-align {
+    text-align: center;
+}
