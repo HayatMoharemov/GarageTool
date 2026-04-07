@@ -1,4 +1,5 @@
 from django.apps import apps
+from django.contrib.auth import get_user_model
 from django.contrib.auth.models import Group, Permission
 from django.db.models.signals import post_save, post_migrate
 from django.dispatch import receiver
@@ -6,6 +7,7 @@ from django.dispatch import receiver
 from GarageTool import settings
 from accounts.models import BusinessUser, IndividualUser
 
+UserModel = get_user_model()
 '''
 Signal that automatically creates a profile for a new GeneralUser.
     - Triggered after a GeneralUser instance is created.
@@ -54,3 +56,16 @@ def create_default_user_groups(sender, **kwargs):
     admin_group, created = Group.objects.get_or_create(name='Admin')
     all_perms = Permission.objects.all()
     admin_group.permissions.set(all_perms)
+
+@receiver(post_save, sender=UserModel)
+def create_user_profile(sender, instance, created, **kwargs):
+    if created:
+        if instance.is_business:
+
+            BusinessUser.objects.create(
+                user=instance,
+                company_name='Default Company',
+                tax_number='0000000000'
+            )
+        elif instance.is_individual:
+            IndividualUser.objects.create(user=instance)
