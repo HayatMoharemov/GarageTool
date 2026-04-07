@@ -1,4 +1,7 @@
 # GarageTool
+The web application is deployed on Azure and is live. It can be tested in real time, without the need of installing anything. Just click the following link.
+
+https://garagetool-b5dkf0g9g6dfhgec.swedencentral-01.azurewebsites.net/
 
 GarageTool is a **Django-based web application** designed to help manage garage / auto service businesses. It provides tools for vehicle service tracking, employee management, parts catalogue/inventory, and service-related calculations.
 
