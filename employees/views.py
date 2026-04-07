@@ -43,23 +43,17 @@ class EditEmployee(LoginRequiredMixin, UpdateView):
     form_class = EmployeeForm
 
     def get_object(self, queryset=None):
-
         slug = self.kwargs.get(self.slug_url_kwarg)
 
-        employee = EmployeeModel.objects.filter(slug=slug).first()
+        employee = EmployeeModel.objects.filter(
+            slug=slug,
+            company=self.request.user.businessuser
+        ).first()
 
         if employee:
             return employee
 
         raise Http404('Employee not found')
-
-    def get_success_url(self):
-        return reverse(
-            'employees:employee_details',
-            kwargs={
-                'employee_slug': self.object.slug
-            }
-        )
 
 class DeleteEmployee(LoginRequiredMixin, DeleteView):
     template_name = 'employees/delete-employee.html'
@@ -67,26 +61,29 @@ class DeleteEmployee(LoginRequiredMixin, DeleteView):
     success_url = reverse_lazy('employees:employees_list')
 
     def get_object(self, queryset=None):
-
         slug = self.kwargs.get(self.slug_url_kwarg)
 
-        employee = EmployeeModel.objects.filter(slug=slug).first()
+        employee = EmployeeModel.objects.filter(
+            slug=slug,
+            company=self.request.user.businessuser
+        ).first()
 
         if employee:
             return employee
 
         raise Http404('Employee not found')
-
 class EmployeeDetails(LoginRequiredMixin, DetailView):
     template_name = 'employees/employee-details.html'
     slug_field = 'slug'
     slug_url_kwarg = 'employee_slug'
 
-    def get_object(self, queryset = None):
+    def get_object(self, queryset=None):
+        slug = self.kwargs.get(self.slug_url_kwarg)
 
-        slug = self.kwargs.get('employee_slug')
-
-        employee = EmployeeModel.objects.filter(slug=slug).first()
+        employee = EmployeeModel.objects.filter(
+            slug=slug,
+            company=self.request.user.businessuser
+        ).first()
 
         if employee:
             return employee

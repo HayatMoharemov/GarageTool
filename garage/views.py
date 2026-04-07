@@ -4,11 +4,12 @@ from django.http import Http404
 from django.urls import reverse_lazy, reverse
 from django.views.generic import CreateView, ListView, DetailView, UpdateView, DeleteView
 
+from common.mixins import VehicleObjectMixin
 from garage.forms import MotorcycleForm, CarForm
 from garage.models import MotorcycleModel, CarModel
 
 
-class ViewGarage(ListView):
+class ViewGarage(LoginRequiredMixin, VehicleObjectMixin, ListView):
     template_name = 'garage/view-garage.html'
     context_object_name = 'vehicles'
     paginate_by = 12
@@ -37,7 +38,7 @@ class ViewGarage(ListView):
 
         return vehicles
 
-class VehicleCreateBaseView(CreateView):
+class VehicleCreateBaseView(LoginRequiredMixin, CreateView):
 
     def form_valid(self, form):
         form.instance.owner = self.request.user
@@ -49,31 +50,19 @@ class AddBike(VehicleCreateBaseView):
     template_name = 'garage/add-bike.html'
     success_url = reverse_lazy('garage:view_garage')
 
-class AddCar(VehicleCreateBaseView, LoginRequiredMixin):
+class AddCar(VehicleCreateBaseView):
     model = CarModel
     form_class = CarForm
     template_name = 'garage/add-car.html'
     success_url = reverse_lazy('garage:view_garage')
 
-class VehicleDetail(DetailView):
+class VehicleDetail(LoginRequiredMixin, VehicleObjectMixin, DetailView):
     template_name = 'garage/vehicle-detail.html'
     slug_field = 'slug'
     slug_url_kwarg = 'vehicle_slug'
 
-    def get_object(self, queryset=None):
-        slug = self.kwargs.get('vehicle_slug')
 
-        car = CarModel.objects.filter(slug=slug).first()
-        if car:
-            return car
-
-        motorcycle = MotorcycleModel.objects.filter(slug=slug).first()
-        if motorcycle:
-            return motorcycle
-
-        raise Http404('Invalid vehicle type')
-
-class VehicleEdit(UpdateView):
+class VehicleEdit(LoginRequiredMixin, VehicleObjectMixin, UpdateView):
     template_name = 'garage/update-vehicle.html'
     slug_url_kwarg = 'vehicle_slug'
     slug_field = 'slug'
@@ -85,18 +74,6 @@ class VehicleEdit(UpdateView):
         elif isinstance(vehicle, MotorcycleModel):
             return MotorcycleForm
 
-    def get_object(self, queryset = None):
-        slug = self.kwargs.get(self.slug_url_kwarg)
-
-        car = CarModel.objects.filter(slug=slug).first()
-        if car:
-            return car
-
-        motorcycle = MotorcycleModel.objects.filter(slug=slug).first()
-        if motorcycle:
-            return motorcycle
-
-        raise Http404('Vehicle not found')
 
     def get_success_url(self):
         return reverse(
@@ -106,20 +83,7 @@ class VehicleEdit(UpdateView):
                        }
         )
 
-class DeleteVehicle(DeleteView):
+class DeleteVehicle(LoginRequiredMixin,VehicleObjectMixin, DeleteView):
     slug_url_kwarg = 'vehicle_slug'
     template_name = 'garage/delete-vehicle.html'
     success_url = reverse_lazy('garage:view_garage')
-
-    def get_object(self, queryset=None):
-        slug = self.kwargs.get(self.slug_url_kwarg)
-
-        car = CarModel.objects.filter(slug=slug).first()
-        if car:
-            return car
-
-        motorcycle = MotorcycleModel.objects.filter(slug=slug).first()
-        if motorcycle:
-            return motorcycle
-
-        raise Http404('No such vehicle found')

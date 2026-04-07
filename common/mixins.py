@@ -1,5 +1,8 @@
 from django.contrib.auth.mixins import UserPassesTestMixin
 from django.core.exceptions import PermissionDenied
+from django.http import Http404
+
+from garage.models import CarModel, MotorcycleModel
 
 
 class ReadOnlyFieldMixin:
@@ -27,3 +30,28 @@ class AccountOwnershipCheckMixin(UserPassesTestMixin):
 
     def handle_no_permission(self):
         raise PermissionDenied("You do not have permission to edit this profile.")
+
+
+class VehicleObjectMixin:
+    slug_url_kwarg = 'vehicle_slug'
+
+    def get_object(self, queryset=None):
+        slug = self.kwargs.get(self.slug_url_kwarg)
+
+        car = CarModel.objects.filter(
+            slug=slug,
+            owner=self.request.user
+        ).first()
+
+        if car:
+            return car
+
+        motorcycle = MotorcycleModel.objects.filter(
+            slug=slug,
+            owner=self.request.user
+        ).first()
+
+        if motorcycle:
+            return motorcycle
+
+        raise Http404("Vehicle not found")
