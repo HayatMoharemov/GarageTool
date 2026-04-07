@@ -2,8 +2,8 @@ django-rest-framework==0.1.0
 djangorestframework==3.15.2
 asgiref==3.8.1
 Django==4.2.29
-psycopg2==2.9.11
-psycopg2-binary==2.9.11
+psycopg2==2.9.10
+psycopg2-binary==2.9.10
 sqlparse==0.5.5
 tzdata==2025.3
 django-filter==25.2
